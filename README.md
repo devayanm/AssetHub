@@ -1,4 +1,4 @@
-# Asset Registration Project
+# AssetHub Project
 
 ## Overview
 
@@ -51,10 +51,19 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 
 project-root/
 │
-├── contracts/           # Solidity smart contracts
-│   ├── LandAuction.sol
-│   ├── LandMarketplace.sol
-│   ├── ... (other contracts)
+├── contract/              # Solidity smart contracts
+│   ├── contracts/
+│   │    ├── LandAuction.sol
+│   │    ├── LandMarketplace.sol
+│   │    ├── ... (other contracts)
+│   │
+│   ├── migrations/          # Truffle migration scripts
+│   │   ├── 1_initial_migration.js
+│   │   └── 2_deploy_contracts.js
+│   │
+│   ├── test/                # Test scripts for smart contracts
+│   ├── truffle-config.js    # Truffle configuration file 
+│
 │
 ├── client/              # React frontend
 │   ├── public/
@@ -72,12 +81,6 @@ project-root/
 │   │   ├── index.js      # React application index file
 │   │   └── ... (other files)
 │
-├── migrations/          # Truffle migration scripts
-│   ├── 1_initial_migration.js
-│   └── 2_deploy_contracts.js
-│
-├── test/                # Test scripts for smart contracts
-├── truffle-config.js    # Truffle configuration file
 ├── .env                 # Environment variables (Infura API key, etc.)
 └── README.md            # Project documentation
 
