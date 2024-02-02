@@ -96,8 +96,8 @@ project-root/
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/devayanm/asset-registration-project.git
-cd asset-registration-project
+git clone https://github.com/devayanm/AssetHub.git
+cd AssetHub
 ```
 
 2. Install dependencies:
