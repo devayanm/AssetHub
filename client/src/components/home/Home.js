@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const Home = () => {
     return (
         <div>
@@ -8,7 +9,7 @@ const Home = () => {
             <p>Explore and manage your assets with ease.</p>
 
             <div>
-                <h3>Quick Actions</h3>
+                <h3>hello</h3>
                 <ul>
                     <li>
                         <Link to="/land-registration">Register Land</Link>

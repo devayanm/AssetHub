@@ -1,45 +1,63 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { ImCross } from "react-icons/im";
+import images from "../../constants/images.js";
+import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ links }) => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [showList, setShowList] = useState(false);
+    const [toggleMenu, setToggleMenu] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    const toggleMenuHandler = () => {
+        setToggleMenu(prevState => !prevState);
+    };
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container">
-                <Link className="navbar-brand" to="/">
-                    Asset Hub
-                </Link>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/land-marketplace">
-                                Explore
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/dashboard">
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/user-profile">
-                                Profile
-                            </Link>
-                        </li>
-                        {/* Add more navigation links as needed */}
-                    </ul>
-                </div>
+        <nav className="app__navbar">
+            <div className="app__navbar-logo">
+                <img src={images.logo} alt="logo" />
             </div>
+            {windowWidth < 588 ? (
+                <div className="hamburger-menu">
+                    {toggleMenu ? (
+                        <ImCross className="overlay__close" onClick={toggleMenuHandler} />
+                    ) : (
+                        <RxHamburgerMenu className="Burger" onClick={toggleMenuHandler} />
+                    )}
+                    {toggleMenu && (
+                        <div className="burger__list">
+                            <ul className="burger__list-links">
+                                {links.map((link, index) => (
+                                    <li key={index} className="bl" id={index}>
+                                        <a href={link.url}>{link.text}</a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <ul className="app__navbar-links">
+                    {links.map((link, index) => (
+                        <li className="p__opensans" key={index}>
+                            <a href={link.url}>{link.text}</a>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </nav>
     );
 };

@@ -61,11 +61,21 @@ function App() {
     };
 
     provider && loadProvider();
-  }, []);
+  }, []); 
+  const links = [
+    { url: "#home", text: "home" },
+    { url: "#about", text: "about us" },
+    { url: "#explore", text: "explore" },
+    { url: "#dashboard", text: "dashboard" },
+    { url: "#contact", text: "contact us" }
+];
+
 
   return (
     <div className="App">
-      <Navbar />
+        <div>
+          <Navbar links={links} />
+        </div>
       <Routes>
         <Route path="/auth/signin" element={<SignIn />} />
         <Route path="/auth/signup" element={<SignUp />} />
