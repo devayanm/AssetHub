@@ -13,9 +13,10 @@
 }
 * {
   box-sizing: border-box;
-  padding: 0;
+  padding: 0px;
   margin: 0;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 a {

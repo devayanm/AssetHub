@@ -2,22 +2,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 // import { ethers } from "ethers";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
-import Home from "./components/home/Home";
-import LandRegistrationForm from "./components/forms/LandRegistrationForm";
-import VehicleRegistrationForm from "./components/forms/VehicleRegistrationForm";
-import LandMarketplace from "./components/marketplace/LandMarketplace";
-import VehicleMarketplace from "./components/marketplace/VehicleMarketplace";
-import LandRenting from "./components/renting/LandRenting";
-import VehicleRenting from "./components/renting/VehicleRenting";
-import LandAuction from "./components/auction/LandAuction";
-import VehicleAuction from "./components/auction/VehicleAuction";
-import UserProfile from "./components/profile/UserProfile";
+import Navbar from "./components/navbar/Navbar.js";
+import Footer from "./components/footer/Footer.js";
+import Home from "./components/home/Home.js";
+import LandRegistrationForm from "./components/forms/LandRegistrationForm.js";
+import VehicleRegistrationForm from "./components/forms/VehicleRegistrationForm.js";
+import LandMarketplace from "./components/marketplace/LandMarketplace.js";
+import VehicleMarketplace from "./components/marketplace/VehicleMarketplace.js";
+import LandRenting from "./components/renting/LandRenting.js";
+import VehicleRenting from "./components/renting/VehicleRenting.js";
+import LandAuction from "./components/auction/LandAuction.js";
+import VehicleAuction from "./components/auction/VehicleAuction.js";
+import UserProfile from "./components/profile/UserProfile.js";
 import Dashboard from "./components/dashboard/Dashboard.js";
-import SignIn from "./components/auth/SignIn";
-import SignUp from "./components/auth/SignUp";
-import { landRegistrationContract, vehicleRegistrationContract } from "./contractConfig"; // Import your contract
+import SignIn from "./components/auth/SignIn.js";
+import SignUp from "./components/auth/SignUp.js";
+import { landRegistrationContract, vehicleRegistrationContract } from "./contractConfig.js"; // Import your contract
 const ethers = require("ethers");
 
 function App() {

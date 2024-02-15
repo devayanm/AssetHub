@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import images from "../../constants/images.js";
 import './Navbar.css';
 
-const Navbar = ({ links , isLoggedIn}) => {
+const Navbar = ({ links, isLoggedIn }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -33,44 +33,44 @@ const Navbar = ({ links , isLoggedIn}) => {
             </div>
             {windowWidth < 601 ? (
                 <><div className="log_in">
-                    {!isLoggedIn &&(
+                    {!isLoggedIn && (
                         <><button type="button" class="btn">log in</button>
                         </>
                     )}
                 </div>
-                <div className="hamburger-menu">
-                    {toggleMenu ? (
-                        <ImCross className="overlay__close" onClick={toggleMenuHandler} />
-                    ) : (
-                        <RxHamburgerMenu className="Burger" onClick={toggleMenuHandler} />
-                    )}
-                    {toggleMenu && (
-                        <div className="burger__list">
-                            <ul className="burger__list-links">
-                                {links.map((link, index) => (
-                                    <li key={index} className="bl" id={index}>
-                                        <a href={link.url}>{link.text}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                </div></>
+                    <div className="hamburger-menu">
+                        {toggleMenu ? (
+                            <ImCross className="overlay__close" onClick={toggleMenuHandler} />
+                        ) : (
+                            <RxHamburgerMenu className="Burger" onClick={toggleMenuHandler} />
+                        )}
+                        {toggleMenu && (
+                            <div className="burger__list">
+                                <ul className="burger__list-links">
+                                    {links.map((link, index) => (
+                                        <li key={index} className="bl" id={index}>
+                                            <a href={link.url}>{link.text}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div></>
             ) : (
                 <div>
-                   <div className="log_in">
-                       {!isLoggedIn &&(
-                           <><button class="btn2">log in</button>
-                           </>
-                       )}
-                   </div>
-                   <ul className="app__navbar-links">
-                       {links.map((link, index) => (
-                           <li className="p__opensans" key={index}>
-                               <a href={link.url}>{link.text}</a>
-                           </li>
-                       ))}
-                   </ul>
+                    <div className="log_in">
+                        {!isLoggedIn && (
+                            <><button class="btn2">log in</button>
+                            </>
+                        )}
+                    </div>
+                    <ul className="app__navbar-links">
+                        {links.map((link, index) => (
+                            <li className="p__opensans" key={index}>
+                                <a href={link.url}>{link.text}</a>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             )}
         </nav>
