@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { ImCross } from "react-icons/im";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -60,8 +61,7 @@ const Navbar = ({ links, isLoggedIn }) => {
                 <div>
                     <div className="log_in">
                         {!isLoggedIn && (
-                            <><button class="btn2">log in</button>
-                            </>
+                            <Link to="/auth/signin" className="btn2">Log In</Link>
                         )}
                     </div>
                     <ul className="app__navbar-links">

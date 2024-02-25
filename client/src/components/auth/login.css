@@ -1,0 +1,65 @@
+/* ---------- SIGN IN ---------- */
+.sign-in__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  .log_in{
+    background-color: #008080;
+    border-color: black;
+  }
+  .log_in:hover{
+    background-color: #f7fafa;
+    color: black;
+    border-color: black;
+  }
+  .google{
+    background-color: #fdfdfd;
+    border-color: black;
+    color: black;
+  }
+  .google:hover{
+    background-color: #00808073;
+    border-color: black;
+    color: #f7fafa;
+  }
+  
+  .sign-in__backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .sign-in__wrapper form {
+    width: 24rem;
+    max-width: 90%;
+    z-index: 1;
+    animation: showSignInForm 1s;
+  }
+  
+  .sign-in__wrapper form img {
+    width: 4rem;
+  }
+  
+  @keyframes showSignInForm {
+    0%,
+    30% {
+      transform: translate(0, -150%);
+    }
+    70%,
+    90% {
+      transform: translate(0, 1rem);
+    }
+    80%,
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
