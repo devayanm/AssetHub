@@ -107,12 +107,14 @@
 
 .hamburger-menu {
     position: relative;
+    z-index: 1200;
 }
 
 .Burger,
 .overlay__close {
     font-size: 24px;
     cursor: pointer;
+    z-index: 1200;
 }
 
 .burger__list {
@@ -120,7 +122,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    
+    z-index: 1200;
     align-content: center;
     top: 100px;
     left: 0;

@@ -1,50 +1,66 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React, { useEffect } from "react";
+import { Container, Row, Col } from 'react-bootstrap';
 import images from "../../constants/images";
 import './Home.css';
 
-const Home = () => {
-    return (
-        <div className="homepage">
-            <svg className="ellipse1" width="361" height="1015" viewBox="0 0 361 1015" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="-160.327" cy="539.403" rx="520.673" ry="538.883" fill="#90E4C1" />
-            </svg>
-            <svg className="ellipse2" width="385" height="651" viewBox="0 0 385 651" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M765.521 562.342C652.524 698.07 401.884 673.597 205.7 507.68C9.51709 341.764 -57.9187 97.2337 55.0783 -38.4935C168.075 -174.221 418.716 -149.748 614.899 16.1686C811.082 182.085 878.518 426.615 765.521 562.342Z" fill="#90E4C1" />
-            </svg>
-            <svg className="ellipse3" width="330" height="610" viewBox="0 0 330 610" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M867.027 393.268C867.027 610.222 673.065 786.099 433.8 786.099C194.535 786.099 0.572021 610.222 0.572021 393.268C0.572021 176.314 194.535 0.437683 433.8 0.437683C673.065 0.437683 867.027 176.314 867.027 393.268Z" fill="#90E4C1" />
-            </svg>
-            <svg className="ellipse4" width="872" height="143" viewBox="0 0 872 143" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1084 172.5C1084 267.769 841.338 345 542 345C242.662 345 0 267.769 0 172.5C0 77.2308 242.662 -6.10352e-05 542 -6.10352e-05C841.338 -6.10352e-05 1084 77.2308 1084 172.5Z" fill="#90E4C1" />
-            </svg>
 
-            <Container>
-                <Row className="align-items-center">
-                    <Col lg={6}>
-                        <div className="hero-text">
-                            <h1 className="hero-title">AssetHub</h1>
-                            <p className="hero-desc">Streamlining Asset Management: Efficient, Reliable, And Secure</p>
+const Home = () => {
+    useEffect(() => {
+       
+
+        const bootstrapScript = document.createElement('script');
+        bootstrapScript.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js';
+        bootstrapScript.async = true;
+        document.body.appendChild(bootstrapScript);
+
+        return () => {
+            
+            document.body.removeChild(bootstrapScript);
+        };
+    }, []);
+
+    return (
+        <><style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,800&display=swap')
+        </style>
+        <Container fluid>
+                <Row>
+                    <Col style={{ padding: 0 }}>
+                        <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img src={images.background} className="d-block w-100" alt="Image 1" style={{ objectFit: "cover", height: "800px", width: "100vw" }} />
+                                    <div className="carousel-caption">
+                                        <h1 style={{color:"white"}}>mere paas ghar hai</h1>
+                                        <h2>gadi hai makaan hai</h2>
+                                        <h3>tumhare paas kya hai , hain...</h3>
+                                        <button type="button" class="btn btn-lg">Explore</button>
+                                    </div>
+                                </div>
+                                <div className="carousel-item">
+                                    <img src={images.background1} className="d-block w-100" alt="Image 2" style={{ objectFit: "cover", height: "800px", width: "100vw" }} />
+                                    <div className="carousel-caption">
+                                    <h1>mere paas ghar hai</h1>
+                                        <h2  style={{color:"teal"}}>gadi hai makaan hai</h2>
+                                        <h3>tumhare paas kya hai , hain...</h3>
+                                        <button type="button" class="btn btn-lg">Explore</button>
+                                    </div>
+                                </div>
+                                <div className="carousel-item">
+                                    <img src={images.background3} className="d-block w-100" alt="Image 3" style={{ objectFit: "cover", height: "800px", width: "100vw" }} />
+                                    <div className="carousel-caption">
+                                    <h1>mere paas ghar hai</h1>
+                                        <h2>gadi hai makaan hai</h2>
+                                        <h3>tumhare paas kya hai , hain...</h3>
+                                        <button type="button" class="btn btn-lg">Explore</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="hero-image">
-                            <img className="hero-img img-fluid" src={images.hero} alt="Hero" />
-                        </div>
-                    </Col>
-                    <Col lg={6}>
-                        <Button variant="primary">Explore</Button>
                     </Col>
                 </Row>
-                <Row className="mt-5">
-                    <Col lg={12}>
-                        <h2>About AssetHub</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut ligula sit amet magna accumsan bibendum. Nulla facilisi. Sed in porta nisi. Duis ultricies magna vitae tempor rutrum. Integer vitae elit eu nisl condimentum consectetur eget in ex. Nulla facilisi. Vivamus fringilla felis at eros ultricies efficitur. Proin auctor sapien sed ligula placerat, ut molestie urna venenatis.</p>
-                        <p>Nulla facilisi. Curabitur id dictum arcu. Quisque sit amet libero fermentum, varius est eu, convallis justo. Nullam imperdiet ligula nisi, a lobortis libero placerat at. Duis euismod viverra tortor, ut maximus nisi accumsan vel. Ut aliquet, ex in varius consequat, odio quam vulputate nibh, id fermentum libero dui sed dui. Proin bibendum, enim nec commodo finibus, nisl lectus mattis eros, non placerat ligula neque sit amet ex.</p>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
-    );
+            </Container></>
+    )
 };
 
 export default Home;

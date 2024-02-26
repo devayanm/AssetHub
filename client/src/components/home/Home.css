@@ -1,72 +1,85 @@
-.Homepage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    background-color: #F5F5F5;
-    position: relative;
+
+.carousel {
     overflow: hidden;
-    padding: 10px;
 }
 
-.hero-text {
-    height: 100%;
+.carousel-caption h1{
+  height: 100px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  color: teal;
+  font-size: 70px;
+  margin: 0;
+}
+.carousel-caption h2{
+  
+ font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  height: 90px;
+  font-size: 60px;
+  margin: 0;
+
+}
+.carousel-caption h3{
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  height: 90px;
+  font-size: 45px;
+  margin: 0;
+}
+.carousel-item img {
+    width: 100vw;
+    height: 100vh;
+    object-fit:cover;
 }
 
-.hero-title {
-    font-size: 5rem;
-    font-weight: 600;
-    color: #008080;
-}
-
-.hero-desc {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #000000;
-}
-
-.hero-img {
-    position: relative;
-    right: 50px;
-}
-
-.ellipse1 {
+.carousel-caption {
     position: absolute;
-    top: 35px;
-    width: 361px;
-    height: 100%;
-    z-index: -1;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="361" height="1015" viewBox="0 0 361 1015" fill="none"><ellipse cx="-160.327" cy="539.403" rx="520.673" ry="538.883" fill="#90E4C1"/></svg>');
-    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    overflow: hidden;
 }
-
-.ellipse2 {
-    position: absolute;
-    left: 1000px;
-    top: -200px;
-    z-index: -1;
-    width: 385px;
-    height: 100%;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="385" height="651" viewBox="0 0 385 651" fill="none"><path d="M765.521 562.342C652.524 698.07 401.884 673.597 205.7 507.68C9.51709 341.764 -57.9187 97.2337 55.0783 -38.4935C168.075 -174.221 418.716 -149.748 614.899 16.1686C811.082 182.085 878.518 426.615 765.521 562.342Z" fill="#90E4C1"/></svg>');
-    background-repeat: no-repeat;
+.carousel-container {
+    overflow: hidden;
 }
-
-.ellipse3 {
-    position: absolute;
-    left: 1200px;
-    top: 150px;
-    z-index: -1;
-    width: 250px;
-    height: 100%;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="330" height="610" viewBox="0 0 330 610" fill="none"><path d="M867.027 393.268C867.027 610.222 673.065 786.099 433.8 786.099C194.535 786.099 0.572021 610.222 0.572021 393.268C0.572021 176.314 194.535 0.437683 433.8 0.437683C673.065 0.437683 867.027 176.314 867.027 393.268Z" fill="#90E4C1"/></svg>');    background-repeat: no-repeat;
+.btn{
+    background-color: #008080;
+    color: white;
+    border-color: white;
+    border-width: 2px;
+    transform: translateY(150px);
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px !important;
 }
-
-.ellipse4 {
-    position: absolute;
-    left: 700px;
-    top: 280px;
-    z-index: -1;
-    width: 672px;;
-    height: 100%;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="872" height="143" viewBox="0 0 872 143" fill="none"><path d="M1084 172.5C1084 267.769 841.338 345 542 345C242.662 345 0 267.769 0 172.5C0 77.2308 242.662 -6.10352e-05 542 -6.10352e-05C841.338 -6.10352e-05 1084 77.2308 1084 172.5Z" fill="#90E4C1"/></svg>');}
+.btn:hover{
+    background-color: #009999;
+    color: white;
+}
+@media (max-width: 768px) {
+    .carousel-caption h1 {
+        font-size: 40px;
+        height:90px;
+        margin: 5px;
+    }
+    .carousel-caption h2 {
+        font-size: 30px;
+        height: 45px;
+        margin-bottom: 0;
+       
+    }
+    .carousel-caption h3 {
+        font-size: 25px;
+        height: 70px;
+        margin:5px;
+        margin-top: 0;
+    }
+    
+}
