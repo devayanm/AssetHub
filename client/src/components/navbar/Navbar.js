@@ -27,7 +27,7 @@ const Navbar = ({ links, isLoggedIn }) => {
     };
 
     return (
-        <nav className="app__navbar">
+        <nav className="app__navbar container-fluid">
             <div className="app__navbar-logo">
                 <div className="overlay"></div>
                 <img src={images.logo} alt="logo" />

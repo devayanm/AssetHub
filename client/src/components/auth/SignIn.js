@@ -39,11 +39,11 @@ const Login = () => {
       <Form className="shadow p-4 bg-white rounded" onSubmit={handleSubmit}>
         {/* Header */}
         <img
-          className="img-thumbnail mx-auto d-block mb-2"
+          className="img-thumbnail mx-auto d-block mb-1"
           src={images.logo}
           alt="logo"
         />
-        <div className="h4 mb-2 text-center">Sign In</div>
+        <div className="sign-in__title">Sign In</div>
         {/* ALert */}
         {show ? (
           <Alert
