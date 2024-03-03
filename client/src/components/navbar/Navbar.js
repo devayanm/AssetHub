@@ -55,40 +55,43 @@ const Navbar = () => {
                         left: isNavCollapsed ? '-300px' : '0',
                         width: '300px',
                         height: '100%',
-                        backgroundColor: '#333',
-                        colopr:'white',
+                        backgroundColor: 'white',
+                        colopr: 'white',
                         zIndex: '1000',
                         transition: 'left 0.3s ease-in-out',
                         overflowY: 'auto',
                     }}
                 >
                     <button
-                        style={{ position: 'absolute', top: '10px', right: '10px', backgroundColor: 'transparent', border: 'none', color: 'white', fontSize: '1.5rem', cursor: 'pointer' }}
+                        style={{
+                            position: 'absolute', top: '10px', right: '10px', backgroundColor: 'transparent', border: 'none',
+                            color: 'black', fontSize: '1.5rem', cursor: 'pointer'
+                        }}
                         onClick={handleToggleNav}
                     >
                         <FontAwesomeIcon icon={faTimes} />
                     </button>
                     <ul style={{ listStyle: 'none', padding: '20px' }}>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                            <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                 <FontAwesomeIcon icon={faHome} className="mr-1" />
                                 Home
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                            <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                 <FontAwesomeIcon icon={faBook} className="mr-1" />
                                 About Us
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                            <Link to="/explore" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                 <FontAwesomeIcon icon={faTachometerAlt} className="mr-1" />
                                 Explore
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                            <Link to="/dashboard" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                 <FontAwesomeIcon icon={faUser} className="mr-1" />
                                 Dashboard
                             </Link>
@@ -96,13 +99,13 @@ const Navbar = () => {
                         {user ? (
                             <>
                                 <li className="nav-item">
-                                    <Link to="/profile" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                    <Link to="/profile" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                         <FontAwesomeIcon icon={faUser} className="mr-1" />
                                         Profile
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <button className="nav-link btn btn-link" onClick={handleLogout} style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                    <button className="nav-link btn btn-link" onClick={handleLogout} style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                         <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
                                         Logout
                                     </button>
@@ -111,13 +114,13 @@ const Navbar = () => {
                         ) : (
                             <>
                                 <li className="nav-item">
-                                    <Link to="/login" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                    <Link to="/auth/signin" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                         <FontAwesomeIcon icon={faSignInAlt} className="mr-1" />
                                         Login
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/register" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                    <Link to="/auth/signup" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                         <FontAwesomeIcon icon={faUserPlus} className="mr-1" />
                                         Register
                                     </Link>
@@ -135,7 +138,6 @@ const Navbar = () => {
                         width: '100%',
                         height: '100%',
                         background: 'rgba(0, 0, 0, 0.5)',
-                        color: 'black',
                         zIndex: '999',
                     }}
                     onClick={handleToggleNav}
@@ -180,13 +182,13 @@ const Navbar = () => {
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                        <Link to="/explore" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
                                             <FontAwesomeIcon icon={faTachometerAlt} className="mr-1" />
                                             Explore
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                        <Link to="/dashboard" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
                                             <FontAwesomeIcon icon={faUser} className="mr-1" />
                                             Dashboard
                                         </Link>
@@ -207,13 +209,13 @@ const Navbar = () => {
                             ) : (
                                 <>
                                     <li className="nav-item">
-                                        <Link to="/login" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                        <Link to="/auth/signin" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
                                             <FontAwesomeIcon icon={faSignInAlt} className="mr-1" />
                                             Login
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/register" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                        <Link to="/auth/signup" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
                                             <FontAwesomeIcon icon={faUserPlus} className="mr-1" />
                                             Register
                                         </Link>
