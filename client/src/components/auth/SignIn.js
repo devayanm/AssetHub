@@ -84,7 +84,7 @@ const Login = () => {
           />
         </div>
         <div className="text-center mt-3">
-          Don't have an account? <Link to="/register">Sign up</Link>
+          Don't have an account? <Link to="/auth/signup">Sign up</Link>
         </div>
       </Card>
     </div>

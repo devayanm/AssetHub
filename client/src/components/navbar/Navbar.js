@@ -35,7 +35,7 @@ const Navbar = () => {
                         <img
                             src={images.logo}
                             alt="Asset-Hub"
-                            height="100"
+                            height="70"
                             className="d-inline-block align-top m-1"
                         />
                     </Link>
@@ -79,7 +79,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
+                            <Link to="/about" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                 <FontAwesomeIcon icon={faBook} className="mr-1" />
                                 About Us
                             </Link>
@@ -150,7 +150,7 @@ const Navbar = () => {
                         <img
                             src={images.logo}
                             alt="Asset-Hub"
-                            height="100"
+                            height="70"
                             className="d-inline-block align-top m-1"
                         />
                     </Link>
@@ -176,7 +176,7 @@ const Navbar = () => {
                             {user ? (
                                 <>
                                     <li className="nav-item">
-                                        <Link to="/" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
+                                        <Link to="/about" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>
                                             <FontAwesomeIcon icon={faBook} className="mr-1" />
                                             About Us
                                         </Link>
