@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/navbar/Navbar.js";
 import Footer from "./components/footer/Footer.js";
@@ -16,38 +15,43 @@ function App() {
 
     const loadProvider = async () => {
       try {
-        if (provider) {
-          window.ethereum.on("accountsChanged", () => window.location.reload());
-          window.ethereum.on("chainChanged", () => window.location.reload());
-          await provider.send("eth_requestAccounts", []);
-          const signer = provider.getSigner();
-          const address = await signer.getAddress();
-          setAccount(address);
-
-          const landContract = new ethers.Contract(
-            landRegistrationContract.address,
-            landRegistrationContract.abi,
-            signer
-          );
-
-          const vehicleContract = new ethers.Contract(
-            vehicleRegistrationContract.address,
-            vehicleRegistrationContract.abi,
-            signer
-          );
-
-          setContract({ landContract, vehicleContract });
-          setProvider(provider);
-        } else {
+        if (!window.ethereum) {
           alert("Metamask is not installed in your browser :(");
+          return;
         }
+
+        window.ethereum.on("accountsChanged", () => {
+          provider.send("eth_requestAccounts", []).then(() => window.location.reload());
+        });
+
+        window.ethereum.on("chainChanged", () => window.location.reload());
+
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        setAccount(address);
+
+        const landContract = new ethers.Contract(
+          landRegistrationContract.address,
+          landRegistrationContract.abi,
+          signer
+        );
+
+        const vehicleContract = new ethers.Contract(
+          vehicleRegistrationContract.address,
+          vehicleRegistrationContract.abi,
+          signer
+        );
+
+        setContract({ landContract, vehicleContract });
+        setProvider(provider);
       } catch (error) {
         console.log(error);
       }
     };
 
-    provider && loadProvider();
-  }, []);
+    loadProvider();
+  }, [provider]);
 
   const links = [
     { url: "#home", text: "home" },
