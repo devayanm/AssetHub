@@ -4,6 +4,8 @@ import { Form, Alert, Card, Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useUserAuth } from "../../context/UserAuthContext";
+import ConnectWalletButton from "./ConnectWalletButton";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -75,6 +77,7 @@ const Login = () => {
             Log In
           </Button>
         </Form>
+        <ConnectWalletButton />
         <hr />
         <div className="text-center mt-3">
           <GoogleButton

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Carousel, Card } from "react-bootstrap";
+import { Button, Carousel, Card, Form, Col, Row, Container, FormControl, InputGroup, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import images from "../../constants/images";
 
@@ -63,75 +63,108 @@ const Home = () => {
                 </Carousel>
             </div>
 
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-8 text-center">
-                        <h2 style={{ color: "#4CAF50", marginBottom: "20px" }}>Welcome to AssetHub</h2>
-                        <p style={{ fontSize: "1.1rem", color: "#888", marginBottom: "20px" }}>
+
+
+            {/* search bar */}
+            <Container className="py-5">
+                <h2 className="mb-4 text-center" style={{ color: "#4CAF50" }}>Find Your Perfect Asset</h2>
+                <Form>
+                    <InputGroup className="mb-3">
+                        <FormControl
+                            placeholder="Search for assets..."
+                            aria-label="Search for assets"
+                            aria-describedby="basic-addon2"
+                            style={{ borderRadius: "30px 0 0 30px" }}
+                        />
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: "0 30px 30px 0" }}>
+                                Filter
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item>Action</Dropdown.Item>
+                                <Dropdown.Item>Another action</Dropdown.Item>
+                                <Dropdown.Item>Something else</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </InputGroup>
+                    <div className="d-grid gap-2 justify-content-center">
+                        <Button variant="success" id="button-addon2" style={{ borderRadius: "30px", fontSize: "0.9rem" }}>
+                            Search
+                        </Button>
+                    </div>
+                </Form>
+                <p className="text-center mt-3" style={{ fontSize: "1.1rem", color: "#888" }}>
+                    Refine your search with advanced filters
+                </p>
+            </Container>
+
+
+            {/* body */}
+            <Container className="py-5">
+                <Row className="mb-5">
+                    <Col md={12} className="text-center">
+                        <h1 className="display-4 mb-4" style={{ color: "#4CAF50" }}>Welcome to AssetHub</h1>
+                        <p className="lead mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
                             Your premier platform for managing and trading real estate assets.
                         </p>
-                        <p style={{ fontSize: "1.1rem", color: "#888", marginBottom: "20px" }}>
+                        <p className="lead mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
                             At AssetHub, we provide a comprehensive solution for registering,
                             renting, and auctioning properties, cars, and land. Whether
                             you're a property owner, renter, or investor, AssetHub has the
                             tools you need to streamline your transactions and maximize your
                             returns.
                         </p>
-                        <p style={{ fontSize: "1.1rem", color: "#888", marginBottom: "20px" }}>
+                        <p className="lead mb-5" style={{ fontSize: "1.2rem", color: "#555" }}>
                             Explore our platform to discover a seamless experience for
                             managing your assets and unlocking new opportunities in the
                             real estate market.
                         </p>
-                    </div>
-                </div>
-
-                <div className="row justify-content-center mt-5">
-                    <div className="col-md-4">
-                        <div className="card border-0 shadow" style={{ backgroundColor: "#F1F8E9", padding: "20px" }}>
-                            <div className="card-body text-center">
-                                <h5 className="card-title" style={{ color: "#4CAF50", marginBottom: "20px" }}>Efficiency</h5>
-                                <p className="card-text" style={{ fontSize: "1.1rem", color: "#555", marginBottom: "0" }}>
-                                    Streamline your property transactions with our intuitive
-                                    platform.
+                    </Col>
+                </Row>
+                <Row className="mb-5">
+                    <Col md={4} className="mb-3">
+                        <Card className="h-100 shadow">
+                            <Card.Body>
+                                <h3 className="card-title" style={{ color: "#4CAF50" }}>Efficiency</h3>
+                                <p className="card-text">
+                                    Streamline your property transactions with our intuitive platform.
                                 </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card border-0 shadow" style={{ backgroundColor: "#F1F8E9", padding: "20px" }}>
-                            <div className="card-body text-center">
-                                <h5 className="card-title" style={{ color: "#4CAF50", marginBottom: "20px" }}>Accessibility</h5>
-                                <p className="card-text" style={{ fontSize: "1.1rem", color: "#555", marginBottom: "0" }}>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col md={4} className="mb-3">
+                        <Card className="h-100 shadow">
+                            <Card.Body>
+                                <h3 className="card-title" style={{ color: "#4CAF50" }}>Accessibility</h3>
+                                <p className="card-text">
                                     Access your assets and manage transactions anytime, anywhere.
                                 </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card border-0 shadow" style={{ backgroundColor: "#F1F8E9", padding: "20px" }}>
-                            <div className="card-body text-center">
-                                <h5 className="card-title" style={{ color: "#4CAF50", marginBottom: "20px" }}>Security</h5>
-                                <p className="card-text" style={{ fontSize: "1.1rem", color: "#555", marginBottom: "0" }}>
-                                    Ensure the safety and integrity of your transactions with our
-                                    robust security measures.
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col md={4} className="mb-3">
+                        <Card className="h-100 shadow">
+                            <Card.Body>
+                                <h3 className="card-title" style={{ color: "#4CAF50" }}>Security</h3>
+                                <p className="card-text">
+                                    Ensure the safety and integrity of your transactions with our robust security measures.
                                 </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="row justify-content-center mt-5">
-                    <div className="col-md-6 text-center">
-                        <h3 style={{ color: "#4CAF50", marginBottom: "20px" }}>Ready to Manage Your Assets?</h3>
-                        <p style={{ fontSize: "1.1rem", color: "#888", marginBottom: "20px" }}>
-                            Sign up for a free account today and experience the power of
-                            AssetHub.
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row className="mb-5">
+                    <Col md={6} className="mb-3">
+                        <h2 className="mb-4" style={{ color: "#4CAF50" }}>Ready to Manage Your Assets?</h2>
+                        <p className="mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
+                            Sign up for a free account today and experience the power of AssetHub.
                         </p>
-                        <Link to="/auth/signup" >
-                            <button className="btn btn-success btn-lg" style={{ width: "200px" }}>Sign Up Now</button>
-                        </Link>                    </div>
-                </div>
-            </div>
+                        <Link to="/auth/signup">
+                            <Button variant="success" size="lg">Sign Up Now</Button>
+                        </Link>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 };

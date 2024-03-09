@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/navbar/Navbar.js";
 import Footer from "./components/footer/Footer.js";
-import { landRegistrationContract, vehicleRegistrationContract } from "./contractConfig.js"; // Import your contract
 import RoutesConfig from "./routes.js";
+import { landRegistrationContract, vehicleRegistrationContract } from "./contractConfig.js";
 const ethers = require("ethers");
 
 function App() {

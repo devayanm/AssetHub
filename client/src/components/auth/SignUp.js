@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert, Card, Button } from "react-bootstrap";
 import { FaEnvelope, FaLock, FaUser, FaPhone } from "react-icons/fa";
 import { useUserAuth } from "../../context/UserAuthContext";
+import ConnectWalletButton from "./ConnectWalletButton";
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -46,6 +47,7 @@ const Register = () => {
                             />
                         </div>
                     </Form.Group>
+
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div className="input-group">
@@ -95,6 +97,7 @@ const Register = () => {
                         Sign up
                     </Button>
                 </Form>
+                <ConnectWalletButton />
                 <div className="text-center mt-3">
                     Already have an account? <Link to="/auth/signin">Log In</Link>
                 </div>

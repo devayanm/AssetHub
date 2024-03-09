@@ -13,7 +13,7 @@ import VehicleRenting from "./components/renting/VehicleRenting.js";
 import LandAuction from "./components/auction/LandAuction.js";
 import VehicleAuction from "./components/auction/VehicleAuction.js";
 import UserProfile from "./components/profile/UserProfile.js";
-import Explore from "./components/Explore/Explore.js";
+import Explore from "./components/explore/Explore.js";
 
 const RoutesConfig = ({ contract }) => {
     return (
@@ -23,7 +23,7 @@ const RoutesConfig = ({ contract }) => {
             <Route path="/auth/signup" element={<SignUp />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/profile" element={<UserProfile />} />
             <Route
                 path="/land-registration"
                 element={<LandRegistrationForm contract={contract?.landContract} />}
