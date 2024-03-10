@@ -4,7 +4,7 @@ import { Form, Alert, Card, Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useUserAuth } from "../../context/UserAuthContext";
-import ConnectWalletButton from "./ConnectWalletButton";
+import Metamask from "../Metamask";
 
 
 const Login = () => {
@@ -72,12 +72,11 @@ const Login = () => {
               />
             </div>
           </Form.Group>
-
+          <Metamask/>
           <Button variant="primary" type="submit" className="w-100 mt-3">
             Log In
           </Button>
         </Form>
-        <ConnectWalletButton />
         <hr />
         <div className="text-center mt-3">
           <GoogleButton

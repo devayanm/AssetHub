@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert, Card, Button } from "react-bootstrap";
 import { FaEnvelope, FaLock, FaUser, FaPhone } from "react-icons/fa";
 import { useUserAuth } from "../../context/UserAuthContext";
-import ConnectWalletButton from "./ConnectWalletButton";
+import Metamask from "../Metamask";
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -92,12 +92,11 @@ const Register = () => {
                             />
                         </div>
                     </Form.Group>
-
+                    <Metamask />
                     <Button variant="primary" type="submit" className="w-100 mt-3">
                         Sign up
                     </Button>
                 </Form>
-                <ConnectWalletButton />
                 <div className="text-center mt-3">
                     Already have an account? <Link to="/auth/signin">Log In</Link>
                 </div>

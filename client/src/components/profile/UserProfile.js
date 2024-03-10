@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { Button, Image } from "react-bootstrap";
 import { BsPencilSquare } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
+import Metamask from "../Metamask";
 
 
 const UserProfile = () => {
@@ -61,6 +62,9 @@ const UserProfile = () => {
                                 <ProfileDetails userData={userData} onEdit={handleEditProfileDetails} />
                             )}
                             {editProfileDetails && <ProfileDetailsForm userData={userData} onCancel={handleCancelEdit} />}
+                        </div>
+                        <div>
+                            <Metamask />
                         </div>
                     </div>
                 </div>
