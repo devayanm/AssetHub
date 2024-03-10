@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button, Image } from "react-bootstrap";
-import { BsPencilSquare } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
+import { Button, Image, Modal } from "react-bootstrap";
+import { BsPencilSquare, BsCheckCircle, BsXCircle } from "react-icons/bs";
+import { FaUserEdit } from "react-icons/fa";
 import Metamask from "../Metamask";
-
 
 const UserProfile = () => {
     const [userData, setUserData] = useState({});
     const [editProfileImage, setEditProfileImage] = useState(false);
     const [editProfileDetails, setEditProfileDetails] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     useEffect(() => {
         fetchUserData();
@@ -39,6 +40,14 @@ const UserProfile = () => {
         setEditProfileDetails(false);
     };
 
+    const handleCloseErrorModal = () => {
+        setError(null);
+    };
+
+    const handleCloseSuccessModal = () => {
+        setSuccess(null);
+    };
+
     return (
         <div className="container mt-5">
             <h2 className="text-center mb-4">Profile</h2>
@@ -52,7 +61,7 @@ const UserProfile = () => {
                             <hr />
                             <div className="profile-image-container justify-content-center align-items-center">
                                 {editProfileImage ? (
-                                    <ProfileImageForm onCancel={handleCancelEdit} />
+                                    <ProfileImageForm onCancel={handleCancelEdit} setSuccess={setSuccess} setError={setError} />
                                 ) : (
                                     <ProfileImage userData={userData} onEdit={handleEditProfileImage} />
                                 )}
@@ -61,7 +70,7 @@ const UserProfile = () => {
                             {!editProfileImage && !editProfileDetails && (
                                 <ProfileDetails userData={userData} onEdit={handleEditProfileDetails} />
                             )}
-                            {editProfileDetails && <ProfileDetailsForm userData={userData} onCancel={handleCancelEdit} />}
+                            {editProfileDetails && <ProfileDetailsForm userData={userData} onCancel={handleCancelEdit} setSuccess={setSuccess} setError={setError} />}
                         </div>
                         <div>
                             <Metamask />
@@ -70,6 +79,28 @@ const UserProfile = () => {
                 </div>
             </div>
             <AssetImages />
+            <Modal show={!!error} onHide={handleCloseErrorModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{error}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseErrorModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={!!success} onHide={handleCloseSuccessModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{success}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseSuccessModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
@@ -83,14 +114,14 @@ const ProfileDetails = ({ userData, onEdit }) => {
             <p className="card-text"><strong>Phone Number:</strong> {userData.phone}</p>
             <p className="card-text"><strong>PAN Number:</strong> {userData.pan}</p>
             <p className="card-text"><strong>Aadhar Number:</strong> {userData.aadhar}</p>
-            <Button variant="outline-primary" onClick={onEdit} className="edit-button">
-                <BsPencilSquare /> Edit
+            <Button variant="outline-success" onClick={onEdit} className="edit-button">
+                <FaUserEdit /> Edit
             </Button>
         </div>
     );
 };
 
-const ProfileDetailsForm = ({ userData, onCancel }) => {
+const ProfileDetailsForm = ({ userData, onCancel, setSuccess, setError }) => {
     return (
         <Formik
             initialValues={{
@@ -102,7 +133,7 @@ const ProfileDetailsForm = ({ userData, onCancel }) => {
             }}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
+                    setSuccess("Profile details updated successfully!");
                     setSubmitting(false);
                 }, 400);
             }}
@@ -141,8 +172,12 @@ const ProfileDetailsForm = ({ userData, onCancel }) => {
                         <Field type="text" name="aadhar" className="form-control" />
                         <ErrorMessage name="aadhar" component="div" className="error" />
                     </div>
-                    <Button type="submit" variant="primary" disabled={isSubmitting}>Save</Button>
-                    <Button type="button" variant="secondary" onClick={onCancel} className="ms-2">Cancel</Button>
+                    <Button type="submit" variant="success" disabled={isSubmitting}>
+                        <BsCheckCircle /> Save
+                    </Button>
+                    <Button type="button" variant="secondary" onClick={onCancel} className="ms-2">
+                        <BsXCircle /> Cancel
+                    </Button>
                 </Form>
             )}
         </Formik>
@@ -157,7 +192,7 @@ const ProfileImage = ({ userData, onEdit }) => {
                     <Image src={userData.profileImage} alt="Profile" roundedCircle style={{ width: "100%", height: "100%" }} />
                 ) : (
                     <div className="empty-profile-image d-flex justify-content-center align-items-center" style={{ width: "100%", height: "100%", backgroundColor: "#f0f0f0" }}>
-                        <FaUser style={{ fontSize: "50px", color: "#999" }} />
+                        <FaUserEdit style={{ fontSize: "50px", color: "#999" }} />
                     </div>
                 )}
             </div>
@@ -165,7 +200,7 @@ const ProfileImage = ({ userData, onEdit }) => {
                 <p className="text-muted mb-0">Click on the image to edit</p>
             </div>
             <div className="text-end mt-2">
-                <Button variant="outline-primary" onClick={onEdit} className="edit-button">
+                <Button variant="outline-success" onClick={onEdit} className="edit-button">
                     <BsPencilSquare /> Edit
                 </Button>
             </div>
@@ -173,14 +208,13 @@ const ProfileImage = ({ userData, onEdit }) => {
     );
 };
 
-
-const ProfileImageForm = ({ onCancel }) => {
+const ProfileImageForm = ({ onCancel, setSuccess }) => {
     return (
         <Formik
             initialValues={{ profileImage: "" }}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
+                    setSuccess("Profile image updated successfully!");
                     setSubmitting(false);
                 }, 400);
             }}
@@ -195,8 +229,12 @@ const ProfileImageForm = ({ onCancel }) => {
                         <Field type="file" name="profileImage" className="form-control-file" accept="image/*" />
                         <ErrorMessage name="profileImage" component="div" className="error" />
                     </div>
-                    <Button type="submit" variant="primary" disabled={isSubmitting}>Save</Button>
-                    <Button type="button" variant="secondary" onClick={onCancel} className="ms-2">Cancel</Button>
+                    <Button type="submit" variant="success" disabled={isSubmitting}>
+                        <BsCheckCircle /> Save
+                    </Button>
+                    <Button type="button" variant="secondary" onClick={onCancel} className="ms-2">
+                        <BsXCircle /> Cancel
+                    </Button>
                 </Form>
             )}
         </Formik>
@@ -204,7 +242,7 @@ const ProfileImageForm = ({ onCancel }) => {
 };
 
 const AssetImages = () => {
-    return null; // Implement AssetImages component here
+    return null; 
 };
 
 export default UserProfile;

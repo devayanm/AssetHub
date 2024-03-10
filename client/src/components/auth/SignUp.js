@@ -93,7 +93,7 @@ const Register = () => {
                         </div>
                     </Form.Group>
                     <Metamask />
-                    <Button variant="primary" type="submit" className="w-100 mt-3">
+                    <Button variant="success" type="submit" className="w-100 mt-3">
                         Sign up
                     </Button>
                 </Form>

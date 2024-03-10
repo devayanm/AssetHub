@@ -74,7 +74,7 @@ const MetaMaskButtons = () => {
                 </>
             ) : (
                 <button
-                    className="btn btn-outline-primary"
+                    className="btn btn-outline-success"
                     style={{
                         padding: '10px 20px',
                         fontSize: '16px',
@@ -91,7 +91,7 @@ const MetaMaskButtons = () => {
                     <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{error}</Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer>  
                     <button
                         className="btn btn-outline-danger"
                         style={{
@@ -99,7 +99,7 @@ const MetaMaskButtons = () => {
                             fontSize: '16px',
                             borderRadius: '5px',
                             cursor: 'pointer'
-                        }}
+                        }} 
                         onClick={handleCloseErrorModal}
                     >
                         Disconnect Wallet

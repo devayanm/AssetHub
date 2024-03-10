@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import images from "../../constants/images";
 
 const Home = () => {
-    const handleExploreClick = () => {
-        window.location.href = "/explore";
-    };
 
     return (
         <>
@@ -24,7 +21,9 @@ const Home = () => {
                                 <h1 className="text-dark fw-bold mb-3 display-5">Mere Paas to</h1>
                                 <h2 className="text-dark fw-bold mb-4 display-6">Ghar hai, Gadi Hai, Zameen Hai</h2>
                                 <h3 className="text-dark mb-5 display-7 d-none d-sm-block">Tumhare Paas Kya Hai, Hain...</h3>
-                                <Button variant="outline-dark" size="lg" onClick={handleExploreClick}>Explore</Button>
+                                <Link to="/explore">
+                                    <button className="btn btn-outline-dark btn-lg">Explore</button>
+                                </Link>
                             </div>
                         </Carousel.Caption>
                     </Carousel.Item>
@@ -40,7 +39,9 @@ const Home = () => {
                                 <h1 className="text-dark fw-bold mb-3 display-5">Mere Paas to</h1>
                                 <h2 className="text-dark fw-bold mb-4 display-6">Ghar hai, Gadi Hai, Zameen Hai</h2>
                                 <h3 className="text-dark mb-5 display-7 d-none d-sm-block">Tumhare Paas Kya Hai, Hain...</h3>
-                                <Button variant="outline-dark" size="lg" onClick={handleExploreClick}>Explore</Button>
+                                <Link to="/explore">
+                                    <button className="btn btn-outline-dark btn-lg">Explore</button>
+                                </Link>
                             </div>
                         </Carousel.Caption>
                     </Carousel.Item>
@@ -56,7 +57,9 @@ const Home = () => {
                                 <h1 className="text-dark fw-bold mb-3 display-5">Mere Paas to</h1>
                                 <h2 className="text-dark fw-bold mb-4 display-6">Ghar hai, Gadi Hai, Zameen Hai</h2>
                                 <h3 className="text-dark mb-5 display-7 d-none d-sm-block">Tumhare Paas Kya Hai, Hain...</h3>
-                                <Button variant="outline-dark" size="lg" onClick={handleExploreClick}>Explore</Button>
+                                <Link to="/explore">
+                                    <button className="btn btn-outline-dark btn-lg">Explore</button>
+                                </Link>
                             </div>
                         </Carousel.Caption>
                     </Carousel.Item>
@@ -77,7 +80,7 @@ const Home = () => {
                             style={{ borderRadius: "30px 0 0 30px" }}
                         />
                         <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: "0 30px 30px 0" }}>
+                            <Dropdown.Toggle variant="outline-success" id="dropdown-basic" style={{ borderRadius: "0 30px 30px 0" }}>
                                 Filter
                             </Dropdown.Toggle>
                             <Dropdown.Menu>

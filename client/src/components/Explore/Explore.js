@@ -1,62 +1,92 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
+import { FaSearch, FaShoppingBag, FaRegHandshake, FaScroll, FaGavel } from "react-icons/fa";
+import images from "../../constants/images";
+
 
 const Explore = () => {
   return (
     <div className="container mt-5">
+      <div className="row mb-4">
+        <div className="col-md-6 mx-auto">
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="Search for assets..."
+              aria-label="Search for assets"
+              aria-describedby="basic-addon2"
+            />
+            <Button variant="outline-success" id="button-addon2">
+              <FaSearch />
+            </Button>
+          </InputGroup>
+        </div>
+      </div>
       <h1 className="mb-4 text-center">Explore Assets</h1>
       <div className="row">
-        <div className="col-md-6 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title text-center">Buy/Sell Assets</h5>
-              <p className="card-text text-center">Explore assets available for buying or selling.</p>
+        <div className="col-md-3 mb-4">
+          <Card className="h-100 shadow" style={{ maxWidth: "300px", margin: "auto" }}>
+            <Card.Img variant="top" src={images.explore1} alt="Buy/Sell Assets" style={{ height: '300px', width: '100%', objectFit: 'cover' }} />
+            <Card.Body className="d-flex flex-column justify-content-between">
+              <Card.Title className="text-center">Buy/Sell Assets</Card.Title>
+              <Card.Text className="text-center">
+                Explore assets available for buying or selling.
+              </Card.Text>
               <div className="text-center">
-                <Link to="/buy-sell" className="btn btn-primary" style={{ backgroundColor: '#4CAF50', borderColor: '#4CAF50' }}>
-                  Explore
+                <Link to="/buy-sell" className="btn btn-outline-success">
+                  <FaShoppingBag className="me-1" /> Explore
                 </Link>
               </div>
-            </div>
-          </div>
+            </Card.Body>
+          </Card>
         </div>
-        <div className="col-md-6 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title text-center">Rent Assets</h5>
-              <p className="card-text text-center">Browse assets available for rent or list your assets for rent.</p>
+        <div className="col-md-3 mb-4">
+          <Card className="h-100 shadow" style={{ maxWidth: "300px", margin: "auto" }}>
+            <Card.Img variant="top" src={images.explore2} alt="Rent Assets" style={{ height: '300px', width: '100%', objectFit: 'cover' }} />
+            <Card.Body className="d-flex flex-column justify-content-between">
+              <Card.Title className="text-center">Rent Assets</Card.Title>
+              <Card.Text className="text-center">
+                Browse assets available for rent or list your assets for rent.
+              </Card.Text>
               <div className="text-center">
-                <Link to="/rent" className="btn btn-primary" style={{ backgroundColor: '#4CAF50', borderColor: '#4CAF50' }}>
-                  Explore
+                <Link to="/rent" className="btn btn-outline-success">
+                  <FaRegHandshake className="me-1" /> Explore
                 </Link>
               </div>
-            </div>
-          </div>
+            </Card.Body>
+          </Card>
         </div>
-        <div className="col-md-6 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title text-center">Register Assets</h5>
-              <p className="card-text text-center">Register your assets for official record-keeping or ownership transfer.</p>
+        <div className="col-md-3 mb-4">
+          <Card className="h-100 shadow" style={{ maxWidth: "300px", margin: "auto" }}>
+            <Card.Img variant="top" src={images.explore3} alt="Register Assets" style={{ height: '300px', width: '100%', objectFit: 'cover' }} />
+            <Card.Body className="d-flex flex-column justify-content-between">
+              <Card.Title className="text-center">Register Assets</Card.Title>
+              <Card.Text className="text-center">
+                Register your assets for official record-keeping or ownership transfer.
+              </Card.Text>
               <div className="text-center">
-                <Link to="/register" className="btn btn-primary" style={{ backgroundColor: '#4CAF50', borderColor: '#4CAF50' }}>
-                  Register Now
+                <Link to="/register" className="btn btn-outline-success">
+                  <FaScroll className="me-1" /> Register Now
                 </Link>
               </div>
-            </div>
-          </div>
+            </Card.Body>
+          </Card>
         </div>
-        <div className="col-md-6 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title text-center">Auction Assets</h5>
-              <p className="card-text text-center">Participate in asset auctions or list your assets for auction.</p>
+        <div className="col-md-3 mb-4">
+          <Card className="h-100 shadow" style={{ maxWidth: "300px", margin: "auto" }}>
+            <Card.Img variant="top" src={images.explore4} alt="Auction Assets" style={{ height: '300px', width: '100%', objectFit: 'cover' }} />
+            <Card.Body className="d-flex flex-column justify-content-between">
+              <Card.Title className="text-center">Auction Assets</Card.Title>
+              <Card.Text className="text-center">
+                Participate in asset auctions or list your assets for auction.
+              </Card.Text>
               <div className="text-center">
-                <Link to="/auction" className="btn btn-primary" style={{ backgroundColor: '#4CAF50', borderColor: '#4CAF50' }}>
-                  Participate
+                <Link to="/auction" className="btn btn-outline-success">
+                  <FaGavel className="me-1" /> Participate
                 </Link>
               </div>
-            </div>
-          </div>
+            </Card.Body>
+          </Card>
         </div>
       </div>
     </div>

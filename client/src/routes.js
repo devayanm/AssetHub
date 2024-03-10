@@ -14,6 +14,7 @@ import LandAuction from "./components/auction/LandAuction.js";
 import VehicleAuction from "./components/auction/VehicleAuction.js";
 import UserProfile from "./components/profile/UserProfile.js";
 import Explore from "./components/explore/Explore.js";
+import ProtectedRoute from './components/ProtectedRoute';
 
 const RoutesConfig = ({ contract }) => {
     return (
@@ -21,9 +22,9 @@ const RoutesConfig = ({ contract }) => {
             <Route path="/" element={<Home />} />
             <Route path="/auth/signin" element={<SignIn />} />
             <Route path="/auth/signup" element={<SignUp />} />
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/explore" element={<ProtectedRoute> <Explore /> </ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute> <UserProfile /> </ProtectedRoute>} />
             <Route
                 path="/land-registration"
                 element={<LandRegistrationForm contract={contract?.landContract} />}
