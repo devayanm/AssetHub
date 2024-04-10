@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faHome,
@@ -11,21 +11,34 @@ import {
     faSignOutAlt,
     faTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { useUserAuth } from '../../context/UserAuthContext';
 import images from "../../constants/images.js";
 
 const Navbar = () => {
-    const { user, logOut } = useUserAuth();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        document.cookie = 'refreshToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        setIsLoggedIn(false);
+        navigate('/');
+    };
+
+    const checkLoggedIn = () => {
+        const accessToken = document.cookie.split(';').find(cookie => cookie.trim().startsWith('accessToken='));
+        setIsLoggedIn(accessToken !== undefined);
+    };
+
+    useEffect(() => {
+        checkLoggedIn();
+    }, []);
+
     const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
     const handleToggleNav = () => {
         setIsNavCollapsed(!isNavCollapsed);
     };
 
-    const handleLogout = () => {
-        logOut();
-        setIsNavCollapsed(true);
-    };
 
     return (
         <>
@@ -96,7 +109,7 @@ const Navbar = () => {
                                 Dashboard
                             </Link>
                         </li>
-                        {user ? (
+                        {isLoggedIn ? (
                             <>
                                 <li className="nav-item">
                                     <Link to="/profile" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
@@ -173,7 +186,7 @@ const Navbar = () => {
                                     Home
                                 </Link>
                             </li>
-                            {user ? (
+                            {isLoggedIn ? (
                                 <>
                                     <li className="nav-item">
                                         <Link to="/about" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>

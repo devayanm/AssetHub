@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { Button, Image, Modal } from "react-bootstrap";
 import { BsPencilSquare, BsCheckCircle, BsXCircle } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
-import Metamask from "../Metamask";
 
 const UserProfile = () => {
     const [userData, setUserData] = useState({});
@@ -20,7 +19,7 @@ const UserProfile = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get("/api/user");
+            const response = await axios.get("/api/user"); // Fetch user data from backend
             setUserData(response.data);
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -72,13 +71,9 @@ const UserProfile = () => {
                             )}
                             {editProfileDetails && <ProfileDetailsForm userData={userData} onCancel={handleCancelEdit} setSuccess={setSuccess} setError={setError} />}
                         </div>
-                        <div>
-                            <Metamask />
-                        </div>
                     </div>
                 </div>
             </div>
-            <AssetImages />
             <Modal show={!!error} onHide={handleCloseErrorModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Error</Modal.Title>
@@ -175,7 +170,7 @@ const ProfileDetailsForm = ({ userData, onCancel, setSuccess, setError }) => {
                     <Button type="submit" variant="success" disabled={isSubmitting}>
                         <BsCheckCircle /> Save
                     </Button>
-                    <Button type="button" variant="secondary" onClick={onCancel} className="ms-2">
+                    <Button type="button" variant="secondary" onClick={onCancel}>
                         <BsXCircle /> Cancel
                     </Button>
                 </Form>
@@ -186,63 +181,36 @@ const ProfileDetailsForm = ({ userData, onCancel, setSuccess, setError }) => {
 
 const ProfileImage = ({ userData, onEdit }) => {
     return (
-        <div className="profile-image text-center">
-            <div className="profile-image-frame" onClick={onEdit} style={{ width: "150px", height: "150px", borderRadius: "50%", overflow: "hidden", border: "2px solid #4CAF50", margin: "auto" }}>
-                {userData.profileImage ? (
-                    <Image src={userData.profileImage} alt="Profile" roundedCircle style={{ width: "100%", height: "100%" }} />
-                ) : (
-                    <div className="empty-profile-image d-flex justify-content-center align-items-center" style={{ width: "100%", height: "100%", backgroundColor: "#f0f0f0" }}>
-                        <FaUserEdit style={{ fontSize: "50px", color: "#999" }} />
-                    </div>
-                )}
-            </div>
-            <div className="mt-2">
-                <p className="text-muted mb-0">Click on the image to edit</p>
-            </div>
-            <div className="text-end mt-2">
-                <Button variant="outline-success" onClick={onEdit} className="edit-button">
-                    <BsPencilSquare /> Edit
-                </Button>
-            </div>
+        <div>
+            <Image src={userData.avatar} alt="Profile" roundedCircle style={{ width: "200px", height: "200px", objectFit: "cover" }} />
+            <Button variant="outline-success" onClick={onEdit} className="edit-button">
+                <BsPencilSquare /> Edit
+            </Button>
         </div>
     );
 };
 
-const ProfileImageForm = ({ onCancel, setSuccess }) => {
-    return (
-        <Formik
-            initialValues={{ profileImage: "" }}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    setSuccess("Profile image updated successfully!");
-                    setSubmitting(false);
-                }, 400);
-            }}
-            validationSchema={Yup.object().shape({
-                profileImage: Yup.mixed().required("Profile image is required"),
-            })}
-        >
-            {({ isSubmitting }) => (
-                <Form>
-                    <div className="mb-3">
-                        <label className="form-label">Profile Image</label>
-                        <Field type="file" name="profileImage" className="form-control-file" accept="image/*" />
-                        <ErrorMessage name="profileImage" component="div" className="error" />
-                    </div>
-                    <Button type="submit" variant="success" disabled={isSubmitting}>
-                        <BsCheckCircle /> Save
-                    </Button>
-                    <Button type="button" variant="secondary" onClick={onCancel} className="ms-2">
-                        <BsXCircle /> Cancel
-                    </Button>
-                </Form>
-            )}
-        </Formik>
-    );
-};
+const ProfileImageForm = ({ onCancel, setSuccess, setError }) => {
+    const handleImageChange = async (e) => {
+        const formData = new FormData();
+        formData.append("avatar", e.target.files[0]);
 
-const AssetImages = () => {
-    return null; 
+        try {
+            // Send image to backend
+            setSuccess("Profile image updated successfully!");
+        } catch (error) {
+            setError("Error updating profile image");
+        }
+    };
+
+    return (
+        <div>
+            <input type="file" onChange={handleImageChange} accept="image/*" />
+            <Button variant="outline-secondary" onClick={onCancel} className="edit-button">
+                <BsXCircle /> Cancel
+            </Button>
+        </div>
+    );
 };
 
 export default UserProfile;

@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { useUserAuth } from "../context/UserAuthContext";
-const ProtectedRoute = ({ children }) => {
-    const { user } = useUserAuth();
+import axios from "axios";
 
-    console.log("Check user in Private: ", user);
-    if (!user) {
+const ProtectedRoute = ({ children }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+            try {
+                const response = await axios.get("/api/check-auth");
+                if (response.data.isAuthenticated) {
+                    setIsLoggedIn(true);
+                } else {
+                    setIsLoggedIn(false);
+                }
+            } catch (error) {
+                console.error("Error checking authentication:", error);
+                setIsLoggedIn(false);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        checkAuthentication();
+    }, []);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!isLoggedIn) {
         return <Navigate to="/auth/signin" />;
     }
+
     return children;
 };
 

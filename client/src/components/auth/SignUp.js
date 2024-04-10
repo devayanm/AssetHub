@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Alert, Card, Button } from "react-bootstrap";
-import { FaEnvelope, FaLock, FaUser, FaPhone } from "react-icons/fa";
-import { useUserAuth } from "../../context/UserAuthContext";
-import Metamask from "../Metamask";
+import axios from "axios";
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -11,17 +9,16 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const { signUp } = useUserAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
         try {
-            await signUp(email, password);
+            const response = await axios.post("/api/v1/users/signup", { name, email, password, phoneNumber });
             navigate("/");
         } catch (err) {
-            setError(err.message);
+            setError(err.response.data.message); 
         }
     };
 
@@ -34,72 +31,48 @@ const Register = () => {
 
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicName">
-                        <div className="input-group">
-                            <span className="input-group-text">
-                                <FaUser />
-                            </span>
-                            <Form.Control
-                                type="text"
-                                placeholder="Full Name"
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                                className="rounded-end"
-                            />
-                        </div>
+                        <Form.Control
+                            type="text"
+                            placeholder="Full Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
                     </Form.Group>
 
-
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <div className="input-group">
-                            <span className="input-group-text">
-                                <FaEnvelope />
-                            </span>
-                            <Form.Control
-                                type="email"
-                                placeholder="Email address"
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                className="rounded-end"
-                            />
-                        </div>
+                        <Form.Control
+                            type="email"
+                            placeholder="Email address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPhone">
-                        <div className="input-group">
-                            <span className="input-group-text">
-                                <FaPhone />
-                            </span>
-                            <Form.Control
-                                type="tel"
-                                placeholder="Phone Number"
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                                className="rounded-end"
-                            />
-                        </div>
+                        <Form.Control
+                            type="tel"
+                            placeholder="Phone Number"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                        />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <div className="input-group">
-                            <span className="input-group-text">
-                                <FaLock />
-                            </span>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                className="rounded-end"
-                            />
-                        </div>
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
                     </Form.Group>
-                    <Metamask />
+
                     <Button variant="success" type="submit" className="w-100 mt-3">
                         Sign up
                     </Button>
                 </Form>
-                <div className="text-center mt-3">
-                    Already have an account? <Link to="/auth/signin">Log In</Link>
-                </div>
             </Card>
         </div>
     );

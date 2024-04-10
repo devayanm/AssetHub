@@ -5,17 +5,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { UserAuthContextProvider } from './context/UserAuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserAuthContextProvider>
-      <Router>
-        <Routes>
-          <Route path="*" element={<App />} />
-        </Routes>
-      </Router>
-    </UserAuthContextProvider>
+    <Router>
+      <Routes>
+        <Route path="*" element={<App />} />
+      </Routes>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

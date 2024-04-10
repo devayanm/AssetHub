@@ -1,15 +1,13 @@
-// components/Dashboard.js
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { useUserAuth } from "../../context/UserAuthContext";
 import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
-  const { logout } = useUserAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await logout();
+    document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'refreshToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
     navigate('/auth/login');
   };
 
