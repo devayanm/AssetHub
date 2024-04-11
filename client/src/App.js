@@ -5,6 +5,7 @@ import RoutesConfig from "./routes.js";
 import { landRegistrationContract, vehicleRegistrationContract } from "./contractConfig.js";
 const ethers = require("ethers");
 
+
 function App() {
   const [account, setAccount] = useState("");
   const [contract, setContract] = useState(null);

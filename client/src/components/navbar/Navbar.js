@@ -12,33 +12,35 @@ import {
     faTimes
 } from '@fortawesome/free-solid-svg-icons';
 import images from "../../constants/images.js";
+import { userApi } from '../services/api';
 
 const Navbar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-        document.cookie = 'refreshToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-        setIsLoggedIn(false);
-        navigate('/');
-    };
-
-    const checkLoggedIn = () => {
-        const accessToken = document.cookie.split(';').find(cookie => cookie.trim().startsWith('accessToken='));
-        setIsLoggedIn(accessToken !== undefined);
-    };
+    const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
-        checkLoggedIn();
+        const checkAuthentication = () => {
+            const accessToken = localStorage.getItem('accessToken');
+            setAuthenticated(accessToken !== null);
+        };
+        checkAuthentication();
     }, []);
+
+    const handleLogout = async () => {
+        try {
+            await userApi.logoutUser();
+            navigate('/');
+            setAuthenticated(false);
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
 
     const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
     const handleToggleNav = () => {
         setIsNavCollapsed(!isNavCollapsed);
     };
-
 
     return (
         <>
@@ -109,7 +111,7 @@ const Navbar = () => {
                                 Dashboard
                             </Link>
                         </li>
-                        {isLoggedIn ? (
+                        {authenticated ? (
                             <>
                                 <li className="nav-item">
                                     <Link to="/profile" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
@@ -186,7 +188,7 @@ const Navbar = () => {
                                     Home
                                 </Link>
                             </li>
-                            {isLoggedIn ? (
+                            {authenticated ? (
                                 <>
                                     <li className="nav-item">
                                         <Link to="/about" className="nav-link" style={{ fontSize: '1.2rem', marginRight: '15px' }}>

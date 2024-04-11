@@ -1,14 +1,18 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { userApi } from '../services/api';
 
 function Dashboard() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-    document.cookie = 'refreshToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-    navigate('/auth/login');
+    try {
+      await userApi.logoutUser();
+      navigate('/auth/signin'); // Redirect to login page
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
   };
 
   return (
