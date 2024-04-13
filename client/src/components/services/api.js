@@ -168,4 +168,73 @@ export const userApi = {
     },
 };
 
+export const goldApi = {
+    getGoldAssets: async () => {
+        try {
+            const response = await api.get('/gold/assets');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+};
+
+export const cryptoApi = {
+    getCryptocurrencyAssets: async () => {
+        try {
+            const response = await api.get('/cryptocurrency/assets');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+};
+
+export const vehicleApi = {
+    registerVehicle: async (vehicleData) => {
+        try {
+            const response = await api.post('/vehicles/register', vehicleData);
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    getVehicleById: async (vehicleId) => {
+        try {
+            const response = await api.get(`/vehicles/${vehicleId}`);
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    getVehicles: async () => {
+        try {
+            const response = await api.get('/vehicles');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    rentVehicle: async (rentalData) => {
+        try {
+            const response = await api.post('/vehicles/rent', rentalData);
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    returnVehicle: async (returnData) => {
+        try {
+            const response = await api.post('/vehicles/return', returnData);
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+};
+
 export default api;

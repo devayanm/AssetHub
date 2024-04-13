@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
-import { FaSearch, FaShoppingBag, FaRegHandshake, FaScroll, FaGavel } from "react-icons/fa";
+import { FaSearch, FaShoppingBag, FaRegHandshake, FaScroll, FaGavel, FaCoins, FaGem } from "react-icons/fa";
 import images from "../../constants/images";
 
 
@@ -83,6 +83,38 @@ const Explore = () => {
               <div className="text-center">
                 <Link to="/auction" className="btn btn-outline-success">
                   <FaGavel className="me-1" /> Participate
+                </Link>
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="col-md-3 mb-4">
+          <Card className="h-100 shadow" style={{ maxWidth: "300px", margin: "auto" }}>
+            <Card.Img variant="top" src={images.goldImage} alt="Gold" style={{ height: '300px', width: '100%', objectFit: 'cover' }} />
+            <Card.Body className="d-flex flex-column justify-content-between">
+              <Card.Title className="text-center">Gold</Card.Title>
+              <Card.Text className="text-center">
+                Invest in virtual gold assets.
+              </Card.Text>
+              <div className="text-center">
+                <Link to="/gold" className="btn btn-outline-success">
+                  <FaGem className="me-1" /> Explore
+                </Link>
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
+        <div className="col-md-3 mb-4">
+          <Card className="h-100 shadow" style={{ maxWidth: "300px", margin: "auto" }}>
+            <Card.Img variant="top" src={images.cryptoImage} alt="Cryptocurrency" style={{ height: '300px', width: '100%', objectFit: 'cover' }} />
+            <Card.Body className="d-flex flex-column justify-content-between">
+              <Card.Title className="text-center">Cryptocurrency</Card.Title>
+              <Card.Text className="text-center">
+                Invest in virtual cryptocurrency assets.
+              </Card.Text>
+              <div className="text-center">
+                <Link to="/crypto" className="btn btn-outline-success">
+                  <FaCoins className="me-1" /> Explore
                 </Link>
               </div>
             </Card.Body>
