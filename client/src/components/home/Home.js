@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { Button, Carousel, Card, Form, Col, Row, Container, FormControl, InputGroup, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import images from "../../constants/images";
 
 const Home = () => {
+
+    const [authenticated, setAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const checkAuthentication = () => {
+            const accessToken = localStorage.getItem('accessToken');
+            setAuthenticated(accessToken !== null);
+            console.error();
+        };
+        checkAuthentication();
+    }, []);
+
 
     return (
         <>
@@ -159,12 +171,25 @@ const Home = () => {
                 <Row className="mb-5">
                     <Col md={6} className="mb-3">
                         <h2 className="mb-4" style={{ color: "#4CAF50" }}>Ready to Manage Your Assets?</h2>
-                        <p className="mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
-                            Sign up for a free account today and experience the power of AssetHub.
-                        </p>
-                        <Link to="/auth/signup">
-                            <Button variant="success" size="lg">Sign Up Now</Button>
-                        </Link>
+                        {authenticated ? (
+                            <>
+                                <p className="mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
+                                    Sign up for a free account today and experience the power of AssetHub.
+                                </p>
+                                <Link to="/auth/signup">
+                                    <Button variant="success" size="lg">Sign Up Now</Button>
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <p className="mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
+                                    Go to your personalized dashboard to experience the power of AssetHub.
+                                </p>
+                                <Link to="/dashboard">
+                                    <Button variant="success" size="lg">Dashboard</Button>
+                                </Link>
+                            </>
+                        )}
                     </Col>
                 </Row>
             </Container>
