@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Form, Modal, Dropdown, Pagination, Badge } from 'react-bootstrap';
+import { Card, Button, Form, Modal, Dropdown, Pagination, Badge, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { buysellApi } from '../services/api';
 
 const generateSampleData = (numProducts) => {
@@ -60,6 +60,8 @@ const BuySellAssetsPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(9); // Number of products to display per page
     const [isSampleData, setIsSampleData] = useState(false);
+    const [mode, setMode] = useState('buying'); // buying or selling
+    const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '' });
 
     useEffect(() => {
         fetchProducts();
@@ -67,16 +69,26 @@ const BuySellAssetsPage = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await buysellApi.getBuySellAssets();
+            let response;
+            if (!isSampleData) {
+                if (mode === 'buying') {
+                    response = await buysellApi.getBuyingData();
+                } else if (mode === 'selling') {
+                    response = await buysellApi.getSellingData();
+                }
+            } else {
+                const sampleData = generateSampleData(20);
+                response = { data: sampleData };
+            }
             setProducts(response.data);
             setFilteredProducts(response.data);
-            setIsSampleData(false); // Reset sample data flag if real data is fetched successfully
+            setIsSampleData(false);
             setError(null);
         } catch (error) {
             console.error('Error fetching products:', error.message);
             setError(error.message);
             setShowErrorModal(true);
-            setIsSampleData(true); // Set sample data flag
+            setIsSampleData(true);
             const sampleData = generateSampleData(20);
             setProducts(sampleData);
             setFilteredProducts(sampleData);
@@ -128,6 +140,25 @@ const BuySellAssetsPage = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    const handleModeChange = (value) => {
+        setMode(value);
+        setSearchQuery('');
+        setCurrentPage(1);
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewProduct(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleAddProduct = () => {
+        // Add your logic to add new product to backend
+        console.log('New Product:', newProduct);
+    };
+
     return (
         <div className="container mt-5">
             {isSampleData && (
@@ -136,6 +167,60 @@ const BuySellAssetsPage = () => {
                 </div>
             )}
             <h1 className="mb-4 text-center">Buy/Sell Assets</h1>
+            <div className="btn-group" role="group" aria-label="Buy/Sell Toggle">
+                <button
+                    type="button"
+                    className={`btn ${mode === 'buying' ? 'btn-success' : 'btn-outline-success'} btn-sm me-1 rounded-pill`}
+                    onClick={() => handleModeChange('buying')}
+                >
+                    Buying
+                    {mode === 'buying' && <span className="badge bg-light text-dark position-absolute top-0 start-50 translate-middle badge-rounded-pill">Selected</span>}
+                </button>
+                <button
+                    type="button"
+                    className={`btn ${mode === 'selling' ? 'btn-success' : 'btn-outline-success'} btn-sm ms-1 rounded-pill`}
+                    onClick={() => handleModeChange('selling')}
+                >
+                    Selling
+                    {mode === 'selling' && <span className="badge bg-light text-dark position-absolute top-0 start-50 translate-middle badge-rounded-pill">Selected</span>}
+                </button>
+            </div>
+            {mode === 'selling' && (
+                <Form>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter product name"
+                            name="name"
+                            value={newProduct.name}
+                            onChange={handleInputChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                            placeholder="Enter product description"
+                            name="description"
+                            value={newProduct.description}
+                            onChange={handleInputChange}
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control
+                            type="number"
+                            placeholder="Enter product price"
+                            name="price"
+                            value={newProduct.price}
+                            onChange={handleInputChange}
+                        />
+                    </Form.Group>
+                    <Button variant="primary" onClick={handleAddProduct}>Add Product</Button>
+                </Form>
+            )}
             <Form.Group className="mb-3">
                 <Form.Control
                     type="text"
