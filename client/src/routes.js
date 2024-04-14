@@ -14,6 +14,7 @@ import LandAuction from "./components/auction/LandAuction.js";
 import VehicleAuction from "./components/auction/VehicleAuction.js";
 import UserProfile from "./components/profile/UserProfile.js";
 import Explore from "./components/explore/Explore.js";
+import BuySellAssets from "./components/pages/BuySellPage.js";
 import GoldPage from "./components/pages/GoldPage.js";
 import CryptoPage from "./components/pages/CryptocurrencyPage.js";
 import ProtectedRoute from './components/ProtectedRoute';
@@ -25,6 +26,7 @@ const RoutesConfig = ({ contract }) => {
             <Route path="/auth/signin" element={<SignIn />} />
             <Route path="/auth/signup" element={<SignUp />} />
             <Route path="/explore" element={<ProtectedRoute> <Explore /> </ProtectedRoute>} />
+            <Route path="/buy-sell" element={<BuySellAssets />} />
             <Route path="/gold" element={<GoldPage />} />
             <Route path="/crypto" element={<CryptoPage />} />
             <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />

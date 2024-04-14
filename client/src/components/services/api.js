@@ -190,46 +190,28 @@ export const cryptoApi = {
     },
 };
 
-export const vehicleApi = {
-    registerVehicle: async (vehicleData) => {
+export const buysellApi = {
+    getBuySellRealEstateAssets: async () => {
         try {
-            const response = await api.post('/vehicles/register', vehicleData);
+            const response = await api.get('/buy-sell/real-estate/assets');
             return response.data;
         } catch (error) {
             throw error.response.data;
         }
     },
 
-    getVehicleById: async (vehicleId) => {
+    getBuySellVehicleAssets: async () => {
         try {
-            const response = await api.get(`/vehicles/${vehicleId}`);
+            const response = await api.get('/buy-sell/vehicles/assets');
             return response.data;
         } catch (error) {
             throw error.response.data;
         }
     },
 
-    getVehicles: async () => {
+    getBuySellPropertyAssets: async () => {
         try {
-            const response = await api.get('/vehicles');
-            return response.data;
-        } catch (error) {
-            throw error.response.data;
-        }
-    },
-
-    rentVehicle: async (rentalData) => {
-        try {
-            const response = await api.post('/vehicles/rent', rentalData);
-            return response.data;
-        } catch (error) {
-            throw error.response.data;
-        }
-    },
-
-    returnVehicle: async (returnData) => {
-        try {
-            const response = await api.post('/vehicles/return', returnData);
+            const response = await api.get('/buy-sell/properties/assets');
             return response.data;
         } catch (error) {
             throw error.response.data;
