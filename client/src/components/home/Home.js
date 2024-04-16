@@ -1,26 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Carousel, Card, Form, Col, Row, Container, FormControl, InputGroup, Dropdown } from "react-bootstrap";
+import { Button, Carousel, Card, Form, Col, Row, Container, FormControl, InputGroup, Dropdown, Spinner, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import images from "../../constants/images";
 
 const Home = () => {
-
     const [authenticated, setAuthenticated] = useState(false);
+    const [trendingCities, setTrendingCities] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const checkAuthentication = () => {
             const accessToken = localStorage.getItem('accessToken');
-            setAuthenticated(accessToken !== null);
-            console.error();
+            const isAuthenticated = accessToken !== null;
+            console.log('Is authenticated:', isAuthenticated);
+            setAuthenticated(isAuthenticated);
         };
         checkAuthentication();
     }, []);
 
+    useEffect(() => {
+        generateTrendingCities();
+    }, []);
+
+    const generateTrendingCities = async () => {
+        const cityNames = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Jaipur', 'Ahmedabad', 'Pune', 'Surat'];
+        const cities = cityNames.map(async city => {
+            try {
+                const response = await fetch(`https://source.unsplash.com/featured/?${city}&query=city`);
+                return {
+                    name: city,
+                    image: response.url
+                };
+            } catch (error) {
+                console.error(`Error fetching image for ${city}:`, error);
+                return {
+                    name: city,
+                    image: images.default
+                };
+            }
+        });
+        const trendingCitiesData = await Promise.all(cities);
+        setTrendingCities(trendingCitiesData);
+    };
 
     return (
         <>
             <div className=" hero container-fluid mb-3">
-                <Carousel fade>
+                <Carousel fade nextLabel={<span aria-hidden="true">&raquo;</span>} prevLabel={<span aria-hidden="true">&laquo;</span>}>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
@@ -78,7 +105,74 @@ const Home = () => {
                 </Carousel>
             </div>
 
+            {/* Trending cities */}
+            <Container className="py-5">
+                <h2 className="mb-4 text-center" style={{ color: "#4CAF50" }}>Trending Cities for Buying/Selling Assets</h2>
+                <Carousel
+                    fade
+                    interval={null}
+                    indicators={false}
+                    pause={false}
+                    prevIcon={
+                        <span className="carousel-control-prev" style={{ left: '-40px' }} aria-hidden="true">
+                            <i className="fas fa-chevron-left" style={{ color: 'black', fontSize: '30px' }}></i>
+                        </span>}
+                    nextIcon={
+                        <span className="carousel-control-next" style={{ right: '-40px', color: 'blue' }} aria-hidden="true" >
+                            <i className="fas fa-chevron-right" style={{ color: 'black', fontSize: '30px' }}></i>
+                        </span>}
+                >
+                    {[...Array(Math.ceil(trendingCities.length / 5))].map((_, index) => (
+                        <Carousel.Item key={index}>
+                            <div className="d-flex justify-content-around">
+                                {trendingCities.slice(index * 5, (index + 1) * 5).map((city, innerIndex) => (
+                                    <Card
+                                        className="text-center shadow-sm"
+                                        style={{
+                                            width: '12rem',
+                                            cursor: 'pointer',
+                                            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                            borderRadius: '1rem',
+                                            border: 'none',
+                                        }}
+                                    >
+                                        <div
+                                            className="position-relative"
+                                            style={{ borderRadius: '1rem', overflow: 'hidden' }}
+                                        >
+                                            <Card.Img
+                                                src={city.image}
+                                                alt={city.name}
+                                                className="rounded-top"
+                                                style={{
+                                                    height: '10rem',
+                                                    objectFit: 'cover',
+                                                    filter: 'blur(5px)',
+                                                }}
+                                            />
+                                            <div
+                                                className="position-absolute top-50 start-50 translate-middle"
+                                                style={{ transform: 'translate(-50%, -50%)' }}
+                                            >
+                                                <h5 className="text-white">{city.name}</h5>
+                                            </div>
+                                            <div
+                                                className="overlay position-absolute top-0 start-0 w-100 h-100"
+                                                style={{
+                                                    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                                                    opacity: 0,
+                                                    transition: 'opacity 0.3s ease',
+                                                }}
+                                            ></div>
+                                        </div>
+                                    </Card>
 
+                                ))}
+                            </div>
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+            </Container>
 
             {/* search bar */}
             <Container className="py-5">
@@ -174,19 +268,19 @@ const Home = () => {
                         {authenticated ? (
                             <>
                                 <p className="mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
-                                    Sign up for a free account today and experience the power of AssetHub.
+                                    Go to your personalized dashboard to experience the power of AssetHub.
                                 </p>
-                                <Link to="/auth/signup">
-                                    <Button variant="success" size="lg">Sign Up Now</Button>
+                                <Link to="/dashboard">
+                                    <Button variant="success" size="lg">Dashboard</Button>
                                 </Link>
                             </>
                         ) : (
                             <>
                                 <p className="mb-4" style={{ fontSize: "1.2rem", color: "#555" }}>
-                                    Go to your personalized dashboard to experience the power of AssetHub.
+                                    Sign up for a free account today and experience the power of AssetHub.
                                 </p>
-                                <Link to="/dashboard">
-                                    <Button variant="success" size="lg">Dashboard</Button>
+                                <Link to="/auth/signup">
+                                    <Button variant="success" size="lg">Sign Up Now</Button>
                                 </Link>
                             </>
                         )}
