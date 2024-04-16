@@ -45,7 +45,7 @@ const Register = () => {
             formData.append('coverImage', coverImage);
 
             const response = await userApi.registerUser(formData);
-            setShowConfirmation(true); // Show confirmation pop-up
+            setShowConfirmation(true);
             console.log(response);
         } catch (error) {
             console.error('Error occurred during registration:', error);
@@ -55,7 +55,7 @@ const Register = () => {
 
     const handleConfirmationClose = () => {
         setShowConfirmation(false);
-        navigate('/');
+        navigate('/auth/signin');
         window.location.reload();
     };
 
