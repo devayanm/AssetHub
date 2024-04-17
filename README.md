@@ -42,18 +42,19 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 
 <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="50" height="50">
-    <img src="https://web3js.readthedocs.io/en/v1.3.4/_images/logo.svg" width="50" height="50">
+    <img src="https://images.app.goo.gl/5YwvHCh7gvXMm32w8" width="50" height="50">
     <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" width="50" height="50">
     <img src="https://www.trufflesuite.com/img/truffle-logo-dark.svg" width="50" height="50">
-    <img src="https://ethereum.org/static/a386ae19fcda36b1ab9e18e09c089f85/39d71/eth-diamond-purple.png" width="50" height="50">
-    <img src="https://ipfs.io/ipfs/QmTdr8Ki82khFZnqD5N3wSQj31WTUeueUwQzd5PzDgP3VA" width="50" height="50">
-    <img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg" width="50" height="50">
-    <img src="https://expressjs.com/images/express-facebook-share.png" width="50" height="50">
+    <img src="https://images.app.goo.gl/n9zNzDw1K43q6MfXA" width="50" height="50">
+    <img src="https://images.app.goo.gl/UvzWvwTf9KWgLczS6" width="50" height="50">
+    <img src="https://images.app.goo.gl/XNbdWQMCtPWsFyqL8" width="50" height="50">
+    <img src="https://images.app.goo.gl/GkAt7oHdBEtWn6PX6" width="80" height="50">
     <img src="https://www.mongodb.com/assets/images/global/favicon.ico" width="50" height="50">
     <img src="https://jwt.io/img/pic_logo.svg" width="50" height="50">
     <img src="https://res.cloudinary.com/demo/image/upload/cloudinary_icon.png" width="50" height="50">
     <!-- Add more technologies as needed -->
 </div>
+
 
 
 
