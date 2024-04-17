@@ -1,6 +1,6 @@
 # AssetHub Project
 
-![AssetHub Logo](https://example.com/assethub-logo.png)
+![AssetHub Logo](client/src/constants/images/Logo.jpg)
 
 ## Overview
 
