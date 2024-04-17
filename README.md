@@ -38,20 +38,28 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 
 - **Multi-chain Support:** Explore the possibility of extending the DApp to support multiple blockchains, providing users with more choices and interoperability.
 
-##  Tech Stack
+## 🧰 Tech Stack
 
-<img src="https://raw.githubusercontent.com/facebook/react/main/logo.svg" width="48" height="48" alt="React Logo">
-<img src="https://seeklogo.com/vector-logo/426736/web3js" width="50" height="50" alt="Web3.js Logo">
-<img src="https://icons.getbootstrap.com/" width="48" height="48" alt="Bootstrap Logo">
-<img src="https://seeklogo.com/vector-logo/426732/truffle" width="50" height="50" alt="Truffle Suite Logo">
-<img src="https://en.wikipedia.org/wiki/Ethereum" width="50" height="50" alt="Ethereum Logo">
-<img src="https://en.m.wikipedia.org/wiki/File:Ipfs-logo-1024-ice-text.png" width="50" height="50" alt="IPFS Logo">
-<img src="https://en.wikipedia.org/wiki/File:Node.js_logo.svg" width="48" height="48" alt="Node.js Logo">
-<img src="images/expressjs.svg" width="50" height="50" alt="Express.js Logo">  
-<img src="images/mongodb.svg" width="50" height="50" alt="MongoDB Logo">  
-<img src="https://jwt.io/img/pic_logo.svg" width="50" height="50" alt="JWT.io Logo">
-<img src="https://cloudinary.com/static/images/icon.svg" width="50" height="50" alt="Cloudinary Logo">
+The AssetHub project is built using the following technologies:
 
+- **Frontend:**
+  - React.js
+  - Web3.js
+  - Bootstrap
+
+- **Backend:**
+  - Node.js
+  - Express.js
+  - MongoDB
+
+- **Blockchain:**
+  - Ethereum
+
+- **Other Tools:**
+  - Truffle Suite
+  - IPFS
+  - JWT (JSON Web Tokens)
+  - Cloudinary
 
 
 
