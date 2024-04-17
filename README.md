@@ -41,18 +41,17 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 ## 🧰 Tech Stack
 
 <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="50" height="50">
-    <img src="https://images.app.goo.gl/5YwvHCh7gvXMm32w8" width="50" height="50">
-    <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" width="50" height="50">
-    <img src="https://www.trufflesuite.com/img/truffle-logo-dark.svg" width="50" height="50">
-    <img src="https://images.app.goo.gl/n9zNzDw1K43q6MfXA" width="50" height="50">
-    <img src="https://images.app.goo.gl/UvzWvwTf9KWgLczS6" width="50" height="50">
-    <img src="https://images.app.goo.gl/XNbdWQMCtPWsFyqL8" width="50" height="50">
-    <img src="https://images.app.goo.gl/GkAt7oHdBEtWn6PX6" width="80" height="50">
-    <img src="https://www.mongodb.com/assets/images/global/favicon.ico" width="50" height="50">
-    <img src="https://jwt.io/img/pic_logo.svg" width="50" height="50">
-    <img src="https://res.cloudinary.com/demo/image/upload/cloudinary_icon.png" width="50" height="50">
-    <!-- Add more technologies as needed -->
+    <img src="https://raw.githubusercontent.com/facebook/react/main/logo.svg" width="48" height="48" alt="React Logo">
+    <img src="https://seeklogo.com/vector-logo/426736/web3js" width="50" height="50" alt="Web3.js Logo">
+    <img src="https://icons.getbootstrap.com/" width="48" height="48" alt="Bootstrap Logo">
+    <img src="https://seeklogo.com/vector-logo/426732/truffle" width="50" height="50" alt="Truffle Suite Logo">
+    <img src="https://en.wikipedia.org/wiki/Ethereum" width="50" height="50" alt="Ethereum Logo">
+    <img src="https://en.m.wikipedia.org/wiki/File:Ipfs-logo-1024-ice-text.png" width="50" height="50" alt="IPFS Logo">
+    <img src="https://en.wikipedia.org/wiki/File:Node.js_logo.svg" width="48" height="48" alt="Node.js Logo">
+    <img src="https://www.pngwing.com/en/search?q=expressjs" width="50" height="50" alt="Express.js Logo">
+    <img src="https://www.pngwing.com/en/search?q=mongodb" width="50" height="50" alt="MongoDB Logo">
+    <img src="https://jwt.io/img/pic_logo.svg" width="50" height="50" alt="JWT.io Logo">
+    <img src="https://cloudinary.com/static/images/icon.svg" width="50" height="50" alt="Cloudinary Logo">
 </div>
 
 
