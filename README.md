@@ -1,6 +1,3 @@
-Absolutely! Here's your updated README.md with the enhancements we discussed:
-
-```markdown
 # AssetHub Project
 
 ![AssetHub Logo](https://example.com/assethub-logo.png)
@@ -272,5 +269,3 @@ If you would like to contribute to this project, please open an issue or create 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-```
