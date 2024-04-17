@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Card, Alert, Modal } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner } from 'react-bootstrap';
 import { userApi } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import Metamask from "../Metamask";
@@ -28,13 +28,15 @@ const Register = () => {
     const [avatar, setAvatar] = useState(null);
     const [coverImage, setCoverImage] = useState(null);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false); 
     const [showConfirmation, setShowConfirmation] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
+        setLoading(true); 
+        
         try {
             const formData = new FormData();
             formData.append('fullName', fullName);
@@ -50,6 +52,8 @@ const Register = () => {
         } catch (error) {
             console.error('Error occurred during registration:', error);
             setError(error.message || 'An error occurred while processing your request.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -144,8 +148,8 @@ const Register = () => {
                                 </Col>
                                 <Metamask />
                             </Row>
-                            <Button variant="success" type="submit" className="w-100">
-                                Register
+                            <Button variant="success" type="submit" className="w-100 mb-3" disabled={loading}>
+                                {loading ? <Spinner animation="border" size="sm" /> : 'Register'}
                             </Button>
                             <div className="text-center mt-3">
                                 Already have an account? <Link to="/auth/signin">Log In</Link>

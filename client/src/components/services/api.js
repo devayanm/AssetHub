@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000/api/v1';
+const backendUrl = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL_PROD;
 
 const api = axios.create({
-    baseURL: baseURL,
+    baseURL: backendUrl,
 });
 
 export const userApi = {
@@ -11,10 +11,10 @@ export const userApi = {
         try {
             const response = await api.post('/users/login', userData);
 
-            console.log('Login Response:', response); // Log the response
+            console.log('Login Response:', response); 
 
             const { data } = response || {};
-            const { accessToken, refreshToken } = data.data || {}; // Access accessToken and refreshToken from response.data.data
+            const { accessToken, refreshToken } = data.data || {}; 
 
             if (!accessToken || !refreshToken) {
                 throw new Error('Access token or refresh token not provided');
@@ -46,19 +46,14 @@ export const userApi = {
 
     logoutUser: async () => {
         try {
-            // Get the access token from local storage
             const accessToken = localStorage.getItem('accessToken');
-
-            // Check if access token is available
             if (!accessToken) {
                 throw new Error('Access token not found');
             }
 
-            // Remove tokens from local storage
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
 
-            // Send the logout request with the access token in the Authorization header
             const response = await api.post('/users/logout', {}, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -98,30 +93,21 @@ export const userApi = {
 
     getCurrentUser: async () => {
         try {
-            // Get the access token from local storage
             const accessToken = localStorage.getItem('accessToken');
-
-            // Check if access token is available
             if (!accessToken) {
                 throw new Error('Access token not found');
             }
-
-            // Make the GET request to fetch the current user data
             const response = await api.get('/users/current-user', {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
 
-            // Return the user data from the response
             return response.data;
         } catch (error) {
-            // Handle errors
             if (error.response && error.response.data) {
-                // If the server responded with an error message
                 throw error.response.data;
             } else {
-                // If the error is not from the server
                 throw new Error('Failed to fetch user data: ' + error.message);
             }
         }

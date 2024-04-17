@@ -9,7 +9,8 @@ function Dashboard() {
   const handleLogout = async () => {
     try {
       await userApi.logoutUser();
-      navigate('/auth/signin'); // Redirect to login page
+      navigate('/');
+      window.location.reload();
     } catch (error) {
       console.error('Error logging out:', error);
     }

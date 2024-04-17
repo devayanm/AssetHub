@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Container, Row, Col, Image, Modal, ListGroup, Card, Badge } from "react-bootstrap";
+import { Button, Form, Container, Row, Col, Image, Modal, ListGroup, Card, Badge, Spinner } from "react-bootstrap";
 import { userApi } from '../services/api';
 import Metamask from "../Metamask";
 
@@ -109,20 +109,17 @@ const UserProfile = () => {
     };
 
     const handleLogout = async () => {
+        setLoading(true);
         try {
             await userApi.logoutUser();
-            navigate('/auth/signin'); // Redirect to login page
+            navigate('/');
+            window.location.reload();
         } catch (error) {
             console.error('Error logging out:', error);
+        } finally {
+            setLoading(false);
         }
     };
-
-
-
-
-
-
-
 
     return (
         <Container className="py-5">
@@ -166,7 +163,11 @@ const UserProfile = () => {
                                     onCancel={handleCancelClick}
                                 />
                             ) : (
-                                <ViewProfile userData={userData} onEdit={handleEditClick} onLogout={handleLogout} />
+                                <ViewProfile
+                                    userData={userData}
+                                    onEdit={handleEditClick}
+                                    onLogout={handleLogout}
+                                />
                             )}
                         </Card.Body>
                     </Card>
@@ -215,7 +216,7 @@ const UserProfile = () => {
     );
 };
 
-const ViewProfile = ({ userData, onEdit, onLogout }) => {
+const ViewProfile = ({ userData, onEdit, onLogout, loading }) => {
     return (
         <div>
             <div>
@@ -228,7 +229,13 @@ const ViewProfile = ({ userData, onEdit, onLogout }) => {
                 <p className="mb-2"><strong>Address:</strong> {userData.address || "Not Provided"}</p>
                 <Metamask />
                 <Button variant="primary" className="me-3" onClick={onEdit}>Edit</Button>
-                <Button variant="danger" onClick={onLogout}>Logout</Button>
+                <Button
+                    variant="danger"
+                    onClick={onLogout}
+                    disabled={loading}
+                >
+                    {loading ? <Spinner animation="border" size="sm" /> : 'Logout'}
+                </Button>
             </div>
         </div>
     );

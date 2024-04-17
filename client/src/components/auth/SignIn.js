@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Card, Alert, Modal } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner } from 'react-bootstrap';
 import { userApi } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import Metamask from "../Metamask";
@@ -27,22 +27,26 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
+  const [loading, setLoading] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
+    setLoading(true); 
     try {
       const response = await userApi.loginUser({
         username: usernameOrEmail,
         password,
       });
-      setShowConfirmation(true); // Show confirmation pop-up
+      setShowConfirmation(true); 
       console.log(response);
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -53,7 +57,7 @@ const Login = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Toggle password visibility
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -75,17 +79,17 @@ const Login = () => {
 
               <Form.Group controlId="formBasicPassword" className="mb-3 position-relative">
                 <Form.Control
-                  type={showPassword ? 'text' : 'password'} // Toggle password visibility based on showPassword state
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <FontAwesomeIcon
-                  icon={showPassword ? faEyeSlash : faEye} // Show eye icon based on showPassword state
-                  onClick={togglePasswordVisibility} // Toggle password visibility when eye icon is clicked
-                  className="position-absolute end-0 top-50 translate-middle-y me-3" // Position eye icon within the password field
-                  style={{ cursor: 'pointer' }} // Add pointer cursor on hover
+                  icon={showPassword ? faEyeSlash : faEye}
+                  onClick={togglePasswordVisibility}
+                  className="position-absolute end-0 top-50 translate-middle-y me-3"
+                  style={{ cursor: 'pointer' }}
                 />
               </Form.Group>
 
@@ -97,8 +101,8 @@ const Login = () => {
                 <Metamask />
               </div>
 
-              <Button variant="success" type="submit" className="w-100 mb-3">
-                Log In
+              <Button variant="success" type="submit" className="w-100 mb-3" disabled={loading}>
+                {loading ? <Spinner animation="border" size="sm" /> : 'Log In'}
               </Button>
 
               <div className="text-center mt-3">

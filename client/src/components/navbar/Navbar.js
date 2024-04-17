@@ -30,6 +30,7 @@ const Navbar = () => {
         try {
             await userApi.logoutUser();
             navigate('/');
+            window.location.reload();
             setAuthenticated(false);
         } catch (error) {
             console.error('Error logging out:', error);
