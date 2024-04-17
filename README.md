@@ -40,55 +40,16 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 
 ## 🧰 Tech Stack
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js" width="50" height="50">
-        <p>React.js</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://www.ethereum.org/images/logos/web3js.webp" width="50" height="50">
-        <p>Ethers.js</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" width="50" height="50">
-        <p>Bootstrap</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://www.trufflesuite.com/img/truffle-logo-dark.svg" width="50" height="50">
-        <p>Truffle Suite</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://ethereum.org/static/a386ae19fcda36b1ab9e18e09c089f85/39d71/eth-diamond-purple.png" width="50" height="50">
-        <p>Solidity</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Chainlink_Logo.png" width="50" height="50">
-        <p>Chainlink</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://ipfs.io/ipfs/QmTdr8Ki82khFZnqD5N3wSQj31WTUeueUwQzd5PzDgP3VA" width="50" height="50">
-        <p>IPFS</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" width="50" height="50">
-        <p>Node.js</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://expressjs.com/images/express-facebook-share.png" width="50" height="50">
-        <p>Express.js</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://cdn.iconscout.com/icon/free/png-512/mongodb-3-1175138.png" width="50" height="50">
-        <p>MongoDB</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://jwt.io/img/pic_logo.svg" width="50" height="50">
-        <p>JWT</p>
-    </div>
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <img src="https://res.cloudinary.com/demo/image/upload/cloudinary_icon.png" width="50" height="50">
-        <p>Cloudinary</p>
-    </div>
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+    <img src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js" width="50" height="50">
+    <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" width="50" height="50">
+    <img src="https://www.trufflesuite.com/img/truffle-logo-dark.svg" width="50" height="50">
+    <img src="https://ethereum.org/static/a386ae19fcda36b1ab9e18e09c089f85/39d71/eth-diamond-purple.png" width="50" height="50">
+    <img src="https://ipfs.io/ipfs/QmTdr8Ki82khFZnqD5N3wSQj31WTUeueUwQzd5PzDgP3VA" width="50" height="50">
+    <img src="https://cdn.iconscout.com/icon/free/png-512/mongodb-3-1175138.png" width="50" height="50">
+    <img src="https://jwt.io/img/pic_logo.svg" width="50" height="50">
+    <img src="https://expressjs.com/images/express-facebook-share.png" width="50" height="50">
+    <img src="https://res.cloudinary.com/demo/image/upload/cloudinary_icon.png" width="50" height="50">
     <!-- Add more technologies as needed -->
 </div>
 
