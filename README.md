@@ -1,10 +1,15 @@
+Absolutely! Here's your updated README.md with the enhancements we discussed:
+
+```markdown
 # AssetHub Project
+
+![AssetHub Logo](https://example.com/assethub-logo.png)
 
 ## Overview
 
 This decentralized application (DApp) enables users to register and manage assets like land and vehicles on the Ethereum blockchain. It utilizes smart contracts for secure, transparent, and tamper-proof asset registration. The frontend, built with React.js, provides an intuitive user interface, making it accessible to users interacting with the Ethereum blockchain.
 
-## Features
+## 🚀 Features
 
 ### Asset Registration
 
@@ -26,7 +31,7 @@ A robust authentication system secures user accounts, allowing them to access pe
 
 The frontend boasts a responsive design, ensuring a seamless user experience across various devices. Bootstrap is employed for its clean, mobile-friendly components and grid system.
 
-## Future Enhancements
+## 🛠️ Future Enhancements
 
 - **User Notifications:** Implement a notification system to alert users about successful registrations, auction bids, and other relevant activities.
 
@@ -36,55 +41,138 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 
 - **Multi-chain Support:** Explore the possibility of extending the DApp to support multiple blockchains, providing users with more choices and interoperability.
 
-## Tech Stack
+## 🧰 Tech Stack
 
-- **Smart Contracts:** Ethereum smart contracts written in Solidity.
-- **Blockchain Development Framework:** Truffle Suite for smart contract development, testing, and deployment.
-- **Frontend Framework:** React.js for building the user interface.
-- **Web3 Library:** Ethers.js for Ethereum interactions in the frontend.
-- **Styling:** Bootstrap for responsive and clean UI.
-- **Infrastructural Services:** Infura for Ethereum node services.
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <div>
+        <img src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js" width="50" height="50">
+        <p>React.js</p>
+    </div>
+    <div>
+        <img src="https://www.ethereum.org/images/logos/web3js.webp" width="50" height="50">
+        <p>Ethers.js</p>
+    </div>
+    <div>
+        <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" width="50" height="50">
+        <p>Bootstrap</p>
+    </div>
+    <div>
+        <img src="https://www.trufflesuite.com/img/truffle-logo-dark.svg" width="50" height="50">
+        <p>Truffle Suite</p>
+    </div>
+    <div>
+        <img src="https://ethereum.org/static/a386ae19fcda36b1ab9e18e09c089f85/39d71/eth-diamond-purple.png" width="50" height="50">
+        <p>Solidity</p>
+    </div>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Chainlink_Logo.png" width="50" height="50">
+        <p>Chainlink</p>
+    </div>
+    <div>
+        <img src="https://ipfs.io/ipfs/QmTdr8Ki82khFZnqD5N3wSQj31WTUeueUwQzd5PzDgP3VA" width="50" height="50">
+        <p>IPFS</p>
+    </div>
+    <div>
+        <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" width="50" height="50">
+        <p>Node.js</p>
+    </div>
+    <div>
+        <img src="https://expressjs.com/images/express-facebook-share.png" width="50" height="50">
+        <p>Express.js</p>
+    </div>
+    <div>
+        <img src="https://cdn.iconscout.com/icon/free/png-512/mongodb-3-1175138.png" width="50" height="50">
+        <p>MongoDB</p>
+    </div>
+    <div>
+        <img src="https://jwt.io/img/pic_logo.svg" width="50" height="50">
+        <p>JWT</p>
+    </div>
+    <div>
+        <img src="https://res.cloudinary.com/demo/image/upload/cloudinary_icon.png" width="50" height="50">
+        <p>Cloudinary</p>
+    </div>
+    <!-- Add more technologies as needed -->
+</div>
 
 ## Project Structure
 
-```
+``
+
+`
 
 project-root/
 │
-├── contract/              # Solidity smart contracts
-│   ├── contracts/
-│   │    ├── LandAuction.sol
-│   │    ├── LandMarketplace.sol
-│   │    ├── ... (other contracts)
-│   │
-│   ├── migrations/          # Truffle migration scripts
-│   │   ├── 1_initial_migration.js
-│   │   └── 2_deploy_contracts.js
-│   │
-│   ├── test/                # Test scripts for smart contracts
-│   ├── truffle-config.js    # Truffle configuration file 
-│
-│
-├── client/              # React frontend
+├── client/
+│   ├── node_modules/
 │   ├── public/
+│   │   ├── ... (public files)
+│   │
 │   ├── src/
-│   │   ├── components/   # React components (Navbar, Footer, etc.)
-│   │   ├── forms/        # Forms for asset registration
-│   │   ├── auction/      # Auction-related components
-│   │   ├── marketplace/  # Marketplace-related components
-│   │   ├── renting/      # Renting-related components
-│   │   ├── auth/         # Authentication-related components
-│   │   ├── profile/      # User profile components
-│   │   ├── dashboard/    # Dashboard components
-│   │   ├── home/         # Home-related components
-│   │   ├── App.js        # Main React application entry point
-│   │   ├── index.js      # React application index file
-│   │   └── ... (other files)
+│   │   ├── components/
+│   │   ├── constants/
+│   │   ├── App.js
+│   │   ├── App.css
+│   │   ├── index.js
+│   │   ├── index.css
+│   │   ├── routes.js
+│   │   ├── contractConfig.js
+│   │   └── ...
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   ├── package-lock.json
+│   └── README.md
 │
-├── .env                 # Environment variables (Infura API key, etc.)
-└── README.md            # Project documentation
+├── server/
+│   ├── node_modules/
+│   ├── public/
+│   │   ├── ... (public files)
+│   │
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── db/
+│   │   ├── middlewares/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   ├── app.js
+│   │   ├── constants.js
+│   │   └── index.js
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── .prettierrc
+│   ├── package.json
+│   ├── package-lock.json
+│   └── README.md
+│
+├── contract/
+│   ├── build/
+│   ├── contracts/
+│   ├── migrations/
+│   ├── test/
+│   ├── truffle-config.js
+│   └── ...
+│
+└── README.md
 
 ```
+
+## Website Hosting
+
+The website is hosted on the following platforms:
+
+- [AssetHub Vercel App](https://assethubweb.vercel.app/)
+- [HubAsset Vercel App](https://hubasset.vercel.app/)
+
+## Insights
+
+- **Total Lines of Code:** ![Lines of Code](https://img.shields.io/tokei/lines/github/devayanm/AssetHub)
+- **Contributors:** ![Contributors](https://img.shields.io/github/contributors/devayanm/AssetHub)
+- **Repository Size:** ![Repository Size](https://img.shields.io/github/repo-size/devayanm/AssetHub)
+- **Last Commit:** ![Last Commit](https://img.shields.io/github/last-commit/devayanm/AssetHub)
 
 ## Prerequisites
 
@@ -94,50 +182,80 @@ project-root/
 
 3. Ganache: [Install Ganache](https://www.trufflesuite.com/ganache)
 
+Got it! Here's the updated "Getting Started" section with instructions to replace the placeholder URL in the frontend `.env` file:
+
+```markdown
 ## Getting Started
 
-1. Clone the repository:
+1. **Clone the repository:**
 
-```bash
-git clone https://github.com/devayanm/AssetHub.git
-cd AssetHub
-```
-
-2. Install dependencies:
-
-```bash
-# Install Truffle globally
-npm install -g truffle
-
-# Install project dependencies
-cd client
-npm install
-```
-
-3. Configure Environment Variables:
-
-   - Create a `.env` file in the `client` directory.
-   - Add your Infura API key:
-
-   ```env
-   REACT_APP_INFURA_API_KEY=your_infura_api_key
+   ```bash
+   git clone https://github.com/devayanm/AssetHub.git
+   cd AssetHub
    ```
 
-4. Compile and migrate smart contracts:
+2. **Install dependencies for the client:**
 
-```bash
-truffle compile
-truffle migrate --reset
-```
+   ```bash
+   # Install Truffle globally
+   npm install -g truffle
 
-5. Start the React app:
+   # Install project dependencies for the client
+   cd client
+   npm install
+   ```
 
-```bash
-cd client
-npm start
-```
+3. **Install dependencies for the server:**
 
-6. Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to access the DApp.
+   ```bash
+   # Install project dependencies for the server
+   cd ../server
+   npm install
+   ```
+
+4. **Configure Environment Variables:**
+
+   - Create a `.env` file in the `client` directory.
+
+   - Add your backend hosted URL for the client in the client's `.env` file:
+
+     ```env
+     REACT_APP_BACKEND_URL=https://your-backend-hosted-url.com/api/v1
+     ```
+
+   - Create another `.env` file in the `server` directory and add the following environment variables:
+
+     ```env
+     PORT=8000
+     MONGODB_URI=mongodb+srv://your_username:your_password@cluster0.anjoog4.mongodb.net
+     CORS_ORIGIN=*
+     CLOUDINARY_CLOUD_NAME=your_cloud_name
+     CLOUDINARY_API_KEY=your_api_key
+     CLOUDINARY_API_SECRET=your_api_secret
+     CLOUDINARY_URL=cloudinary://your_cloudinary_url
+     ACCESS_TOKEN_SECRET=your_access_token_secret
+     ACCESS_TOKEN_EXPIRY=1d
+     REFRESH_TOKEN_SECRET=your_refresh_token_secret
+     REFRESH_TOKEN_EXPIRY=10d
+     ```
+
+6. **Start the React app:**
+
+   ```bash
+   # Start the React app
+   cd ../client
+   npm start
+   ```
+
+7. **Start the server:**
+
+   ```bash
+   # Start the server
+   cd ../server
+   npm run dev
+   ```
+
+8. **Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to access the DApp.**
 
 ## Testing
 
@@ -154,3 +272,5 @@ If you would like to contribute to this project, please open an issue or create 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+```
