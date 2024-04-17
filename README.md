@@ -40,19 +40,21 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 
 ## 🧰 Tech Stack
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/1200px-Bootstrap_logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Truffle-logo.svg/1024px-Truffle-logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/1200px-WordPress_blue_logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Bootstrap_Logo.svg/2560px-Bootstrap_Logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Node.js_logo.svg/1280px-Node.js_logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/1024px-MongoDB_Logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/JSON_Logo.svg/1280px-JSON_Logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png" width="50" height="50">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Node.js_logo.svg/1280px-Node.js_logo.svg.png" width="50" height="50">
+<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="50" height="50">
+    <img src="https://web3js.readthedocs.io/en/v1.3.4/_images/logo.svg" width="50" height="50">
+    <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" width="50" height="50">
+    <img src="https://www.trufflesuite.com/img/truffle-logo-dark.svg" width="50" height="50">
+    <img src="https://ethereum.org/static/a386ae19fcda36b1ab9e18e09c089f85/39d71/eth-diamond-purple.png" width="50" height="50">
+    <img src="https://ipfs.io/ipfs/QmTdr8Ki82khFZnqD5N3wSQj31WTUeueUwQzd5PzDgP3VA" width="50" height="50">
+    <img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg" width="50" height="50">
+    <img src="https://expressjs.com/images/express-facebook-share.png" width="50" height="50">
+    <img src="https://www.mongodb.com/assets/images/global/favicon.ico" width="50" height="50">
+    <img src="https://jwt.io/img/pic_logo.svg" width="50" height="50">
+    <img src="https://res.cloudinary.com/demo/image/upload/cloudinary_icon.png" width="50" height="50">
     <!-- Add more technologies as needed -->
 </div>
+
 
 
 ## Project Structure
