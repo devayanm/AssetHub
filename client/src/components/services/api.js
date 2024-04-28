@@ -1,6 +1,18 @@
 import axios from 'axios';
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL_PROD;
+const getBackendUrl = () => {
+    if (process.env.REACT_APP_BACKEND_URL) {
+        return process.env.REACT_APP_BACKEND_URL;
+    } else if (process.env.REACT_APP_BACKEND_URL_PROD) {
+        return process.env.REACT_APP_BACKEND_URL_PROD;
+    } else {
+        const errorMessage = 'No backend URL found. Please set REACT_APP_BACKEND_URL or REACT_APP_BACKEND_URL_PROD environment variables.';
+        console.error(errorMessage);
+        throw new Error(errorMessage);
+    }
+};
+
+const backendUrl = getBackendUrl();
 
 const api = axios.create({
     baseURL: backendUrl,
