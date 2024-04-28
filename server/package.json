@@ -6,11 +6,12 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
-    "start": "node src/index.js"
+    "start": "node -e \"require('mkdirp').sync('public/temp');\" && node src/index.js"
   },
   "author": "Biplab mal",
   "license": "ISC",
   "devDependencies": {
+    "mkdirp": "^3.0.1",
     "nodemon": "^3.1.0",
     "prettier": "3.2.5"
   },
