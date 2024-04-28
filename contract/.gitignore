@@ -1,0 +1,26 @@
+# Node.js files
+node_modules/
+
+# Dependency directories
+**/bower_components/
+**/jspm_packages/
+
+# IDE files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build files
+/build/
+/dist/
+
+# Contract build files
+/contract/build/
