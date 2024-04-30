@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const API_BASE_URLS = [
-    'http://localhost:8000/api/v1',
-    'https://assethubbackend.onrender.com/api/v1'
+    process.env.REACT_APP_API_BASE_URL_DEV,
+    process.env.REACT_APP_API_BASE_URL_PROD
 ];
 
 const checkBackendUrlAccessibility = async (url) => {
