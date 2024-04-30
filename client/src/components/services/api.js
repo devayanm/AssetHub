@@ -1,22 +1,56 @@
 import axios from 'axios';
 
-const getBackendUrl = () => {
-    if (process.env.REACT_APP_BACKEND_URL) {
-        return process.env.REACT_APP_BACKEND_URL;
-    } else if (process.env.REACT_APP_BACKEND_URL_PROD) {
-        return process.env.REACT_APP_BACKEND_URL_PROD;
-    } else {
-        const errorMessage = 'No backend URL found. Please set REACT_APP_BACKEND_URL or REACT_APP_BACKEND_URL_PROD environment variables.';
-        console.error(errorMessage);
-        throw new Error(errorMessage);
+const checkBackendUrlAccessibility = async (url) => {
+    try {
+        const response = await axios.get(`${url}/users/help`);
+        if (response.status === 200 && response.data === 'Backend server is up and running.') {
+            console.log(`Backend URL ${url} is accessible.`);
+            return true;
+        } else {
+            console.error(`Backend URL ${url} is not accessible.`);
+            return false;
+        }
+    } catch (error) {
+        console.error(`Error accessing backend URL ${url}:`, error.message);
+        return false;
     }
 };
 
-const backendUrl = getBackendUrl();
+const getBackendUrl = async () => {
+    const developmentUrl = process.env.REACT_APP_BACKEND_URL_DEV;
+    const productionUrl = process.env.REACT_APP_BACKEND_URL_PROD;
 
-const api = axios.create({
-    baseURL: backendUrl,
-});
+    try {
+        if (developmentUrl && (await checkBackendUrlAccessibility(developmentUrl))) {
+            console.log('Using development backend URL:', developmentUrl);
+            return developmentUrl;
+        } else if (productionUrl && (await checkBackendUrlAccessibility(productionUrl))) {
+            console.log('Using production backend URL:', productionUrl);
+            return productionUrl;
+        } else {
+            throw new Error('No accessible backend URL found.');
+        }
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+};
+
+const initializeApi = async () => {
+    const backendUrl = await getBackendUrl();
+
+    try {
+        const api = axios.create({
+            baseURL: backendUrl,
+        });
+        return api;
+    } catch (error) {
+        console.error('Error initializing API:', error.message);
+        throw error;
+    }
+};
+
+const api = await initializeApi();
 
 export const userApi = {
     loginUser: async (userData) => {
