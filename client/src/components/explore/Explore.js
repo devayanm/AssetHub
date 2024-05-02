@@ -34,7 +34,7 @@ const Explore = () => {
               </Card.Text>
               <div className="text-center">
                 <Link to="/buy-sell" className="btn btn-outline-success">
-                  <FaShoppingBag className="me-1" /> Explore
+                  <FaShoppingBag className="me-1" /> Buy/Sell
                 </Link>
               </div>
             </Card.Body>
@@ -50,7 +50,7 @@ const Explore = () => {
               </Card.Text>
               <div className="text-center">
                 <Link to="/rent" className="btn btn-outline-success">
-                  <FaRegHandshake className="me-1" /> Explore
+                  <FaRegHandshake className="me-1" /> Rent Now
                 </Link>
               </div>
             </Card.Body>
@@ -98,7 +98,7 @@ const Explore = () => {
               </Card.Text>
               <div className="text-center">
                 <Link to="/gold" className="btn btn-outline-success">
-                  <FaGem className="me-1" /> Explore
+                  <FaGem className="me-1" /> Invest
                 </Link>
               </div>
             </Card.Body>
@@ -114,7 +114,7 @@ const Explore = () => {
               </Card.Text>
               <div className="text-center">
                 <Link to="/crypto" className="btn btn-outline-success">
-                  <FaCoins className="me-1" /> Explore
+                  <FaCoins className="me-1" /> Invest
                 </Link>
               </div>
             </Card.Body>

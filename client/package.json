@@ -31,6 +31,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
+    "dev": "react-scripts start",
     "start": "nodemon --watch src --ext js,jsx,json --exec \"npm run start:react\"",
     "start:react": "react-scripts start",
     "build": "react-scripts build",

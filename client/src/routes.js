@@ -31,7 +31,7 @@ const RoutesConfig = ({ contract }) => {
             <Route path="/crypto" element={<CryptoPage />} />
             <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute> <UserProfile /> </ProtectedRoute>} />
-            <Route
+            {/* <Route
                 path="/land-registration"
                 element={<LandRegistrationForm contract={contract?.landContract} />}
             />
@@ -62,7 +62,7 @@ const RoutesConfig = ({ contract }) => {
             <Route
                 path="/vehicle-auction"
                 element={<VehicleAuction contract={contract?.vehicleContract} />}
-            />
+            /> */}
             
         </Routes>
     );

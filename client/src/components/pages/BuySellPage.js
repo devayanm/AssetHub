@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Form, Modal, Dropdown, Pagination, Badge, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Card, Button, Col, Form, Modal, Dropdown, Pagination, Badge, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { FaBitcoin, FaEthereum, FaArrowDown, FaArrowLeft, FaArrowUp } from 'react-icons/fa';
 import { buysellApi } from '../services/api';
 
 const generateSampleData = (numProducts) => {
@@ -26,7 +28,7 @@ const generateSampleData = (numProducts) => {
             case 'Properties':
                 name = `Property ${i}`;
                 description = 'Description for property';
-                price = Math.floor(Math.random() * 5000000) + 100000; 
+                price = Math.floor(Math.random() * 5000000) + 100000;
                 image = 'path/to/property_image.jpg';
                 break;
             default:
@@ -150,8 +152,8 @@ const BuySellAssetsPage = () => {
     const handleSwitchToRealData = () => {
         setIsSampleData(false);
         setShowErrorModal(false);
-        setProducts([]); 
-        setFilteredProducts([]); 
+        setProducts([]);
+        setFilteredProducts([]);
     };
 
     const handleModeChange = (value) => {
@@ -184,6 +186,14 @@ const BuySellAssetsPage = () => {
                 </div>
             )}
             <h1 className="mb-4 text-center">Buy/Sell Assets</h1>
+
+            <div className='mb-5'>
+                <Col xs={12} md={4} lg={3} className="mb-3 mb-md-0">
+                    <Link to="/explore" className="btn btn-outline-success">
+                        <FaArrowLeft className="me-2" /> Back to Explore
+                    </Link>
+                </Col>
+            </div>
 
             {isSampleData && !errorModalShown && (
                 <div className="text-center">

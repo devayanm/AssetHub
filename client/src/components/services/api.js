@@ -198,6 +198,60 @@ export const userApi = {
             throw error.response.data;
         }
     },
+
+    getUserAssets: async () => {
+        try {
+            const response = await api.get('/user/assets');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    getOfficialRecords: async () => {
+        try {
+            const response = await api.get('/user/official-records');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    getLicenses: async () => {
+        try {
+            const response = await api.get('/user/licenses');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    getComplianceStatus: async () => {
+        try {
+            const response = await api.get('/user/compliance-status');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    getTaxInformation: async () => {
+        try {
+            const response = await api.get('/user/tax-information');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
+
+    getLegalNotices: async () => {
+        try {
+            const response = await api.get('/user/legal-notices');
+            return response.data;
+        } catch (error) {
+            throw error.response.data;
+        }
+    },
 };
 
 export const goldApi = {
