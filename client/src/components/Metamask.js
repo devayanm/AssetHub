@@ -48,11 +48,17 @@ const MetaMaskButtons = () => {
         }
     };
 
-    const handleDisconnectMetaMask = () => {
-        setIsConnected(false);
-        setAccount(null);
-        localStorage.removeItem('walletState');
-        alert('MetaMask disconnected successfully!');
+    const handleDisconnectMetaMask = async () => {
+        try {
+            await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] });
+            setIsConnected(false);
+            setAccount(null);
+            localStorage.removeItem('walletState');
+            alert('MetaMask disconnected successfully!');
+        } catch (error) {
+            console.error(error);
+            setError('Failed to disconnect from MetaMask. Please try again.');
+        }
     };
 
     const handleCloseErrorModal = () => {
@@ -112,3 +118,4 @@ const MetaMaskButtons = () => {
 };
 
 export default MetaMaskButtons;
+                          
