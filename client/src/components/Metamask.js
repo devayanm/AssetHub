@@ -64,16 +64,18 @@ const MetaMaskButtons = () => {
         }
     };
 
-    const handleDisconnectMetaMask = async () => {
-        try {
-            await window.ethereum.request({ method: 'eth_accounts' });
-            setIsConnected(false);
-            setAccount(null);
-            localStorage.removeItem('walletState');
-            alert('MetaMask disconnected successfully!');
-        } catch (error) {
-            console.error(error);
-            setError('Failed to disconnect from MetaMask. Please try again.');
+    const handleDisconnectMetaMask = () => {
+        setIsConnected(false);
+        setAccount(null);
+        localStorage.removeItem('walletState');
+        alert('MetaMask disconnected from the website. Please manually disconnect from MetaMask extension.');
+    };
+
+    const handleOpenMetaMask = () => {
+        if (window.ethereum) {
+            window.ethereum.request({ method: 'wallet_switchEthereumChain' });
+        } else {
+            alert('MetaMask extension is not installed.');
         }
     };
 
@@ -83,7 +85,7 @@ const MetaMaskButtons = () => {
 
     return (
         <div className="container text-center mt-5">
-            {isConnected ? (
+            {isConnected && account ? (
                 <>
                     <p>Connected with account:</p>
                     <p>{account}</p>
@@ -108,6 +110,18 @@ const MetaMaskButtons = () => {
                     Connect Wallet
                 </button>
             )}
+            <button
+                className="btn btn-outline-primary mt-3"
+                style={{
+                    padding: '10px 20px',
+                    fontSize: '16px',
+                    borderRadius: '5px',
+                    cursor: 'pointer'
+                }}
+                onClick={handleOpenMetaMask}
+            >
+                Open MetaMask
+            </button>
             <Modal show={!!error} onHide={handleCloseErrorModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Error</Modal.Title>
@@ -124,7 +138,7 @@ const MetaMaskButtons = () => {
                         }} 
                         onClick={handleCloseErrorModal}
                     >
-                        Disconnect Wallet
+                        Close
                     </button>
 
                 </Modal.Footer>
@@ -134,4 +148,4 @@ const MetaMaskButtons = () => {
 };
 
 export default MetaMaskButtons;
-            
+        
