@@ -63,7 +63,8 @@ const MetaMaskButtons = () => {
             setError('Failed to connect to MetaMask. Please try again.');
         }
     };
-
+    
+    
     const handleDisconnectMetaMask = async () => {
         try {
             await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] });
@@ -76,6 +77,7 @@ const MetaMaskButtons = () => {
             setError('Failed to disconnect from MetaMask. Please try again.');
         }
     };
+    
 
     const handleCloseErrorModal = () => {
         setError(null);
