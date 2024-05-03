@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const MetaMaskButtons = () => {
     const [isConnected, setIsConnected] = useState(false);
@@ -11,10 +11,22 @@ const MetaMaskButtons = () => {
         const checkMetaMaskConnection = async () => {
             const provider = await detectEthereumProvider();
             if (provider) {
-                const { selectedAddress } = window.ethereum;
-                if (selectedAddress) {
+                window.ethereum.on('accountsChanged', (accounts) => {
+                    if (accounts.length > 0) {
+                        setIsConnected(true);
+                        setAccount(accounts[0]);
+                        localStorage.setItem('walletState', JSON.stringify({ isConnected: true, account: accounts[0] }));
+                    } else {
+                        setIsConnected(false);
+                        setAccount(null);
+                        localStorage.removeItem('walletState');
+                    }
+                });
+
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                if (accounts.length > 0) {
                     setIsConnected(true);
-                    setAccount(selectedAddress);
+                    setAccount(accounts[0]);
                 } else {
                     setIsConnected(false);
                     setAccount(null);
@@ -37,11 +49,15 @@ const MetaMaskButtons = () => {
     const handleConnectMetaMask = async () => {
         try {
             await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const selectedAddress = window.ethereum.selectedAddress;
-            setIsConnected(true);
-            setAccount(selectedAddress);
-            localStorage.setItem('walletState', JSON.stringify({ isConnected: true, account: selectedAddress }));
-            alert('MetaMask connected successfully!');
+            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+            if (accounts.length > 0) {
+                setIsConnected(true);
+                setAccount(accounts[0]);
+                localStorage.setItem('walletState', JSON.stringify({ isConnected: true, account: accounts[0] }));
+                alert('MetaMask connected successfully!');
+            } else {
+                setError('No accounts found in MetaMask. Please make sure you have at least one account available.');
+            }
         } catch (error) {
             console.error(error);
             setError('Failed to connect to MetaMask. Please try again.');
@@ -118,4 +134,4 @@ const MetaMaskButtons = () => {
 };
 
 export default MetaMaskButtons;
-                          
+        
