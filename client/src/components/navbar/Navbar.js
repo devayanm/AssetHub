@@ -17,6 +17,7 @@ import { userApi } from '../services/api';
 const Navbar = () => {
     const navigate = useNavigate();
     const [authenticated, setAuthenticated] = useState(false);
+    const [logoutLoading, setLogoutLoading] = useState(false);
 
     useEffect(() => {
         const checkAuthentication = () => {
@@ -28,12 +29,15 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
+            setLogoutLoading(true);
             await userApi.logoutUser();
             navigate('/');
             window.location.reload();
             setAuthenticated(false);
         } catch (error) {
             console.error('Error logging out:', error);
+        } finally {
+            setLogoutLoading(false);
         }
     };
 
@@ -94,26 +98,26 @@ const Navbar = () => {
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/about" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
-                                <FontAwesomeIcon icon={faBook} className="me-2" />
-                                About Us
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/explore" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
-                                <FontAwesomeIcon icon={faTachometerAlt} className="me-2" />
-                                Explore
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/dashboard" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
-                                <FontAwesomeIcon icon={faUser} className="me-2" />
-                                Dashboard
-                            </Link>
-                        </li>
                         {authenticated ? (
                             <>
+                                <li className="nav-item">
+                                    <Link to="/about" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
+                                        <FontAwesomeIcon icon={faBook} className="me-2" />
+                                        About Us
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/explore" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
+                                        <FontAwesomeIcon icon={faTachometerAlt} className="me-2" />
+                                        Explore
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/dashboard" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
+                                        <FontAwesomeIcon icon={faUser} className="me-2" />
+                                        Dashboard
+                                    </Link>
+                                </li>
                                 <li className="nav-item">
                                     <Link to="/profile" className="nav-link" style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
                                         <FontAwesomeIcon icon={faUser} className="me-2" />
@@ -121,9 +125,18 @@ const Navbar = () => {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <button className="nav-link btn btn-link" onClick={handleLogout} style={{ fontSize: '1.2rem', marginLeft: '30px', padding: '5px' }}>
-                                        <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
-                                        Logout
+                                    <button
+                                        className="nav-link btn btn-link"
+                                        onClick={handleLogout}
+                                        style={{ fontSize: '1.2rem', marginRight: '15px' }}
+                                        disabled={logoutLoading}
+                                    >
+                                        {logoutLoading ? 'Logging out...' : (
+                                            <>
+                                                <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+                                                Logout
+                                            </>
+                                        )}
                                     </button>
                                 </li>
                             </>
@@ -216,9 +229,18 @@ const Navbar = () => {
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <button className="nav-link btn btn-link" onClick={handleLogout} style={{ fontSize: '1.2rem', marginRight: '15px' }}>
-                                            <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
-                                            Logout
+                                        <button
+                                            className="nav-link btn btn-link"
+                                            onClick={handleLogout}
+                                            style={{ fontSize: '1.2rem', marginRight: '15px' }}
+                                            disabled={logoutLoading}
+                                        >
+                                            {logoutLoading ? 'Logging out...' : (
+                                                <>
+                                                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+                                                    Logout
+                                                </>
+                                            )}
                                         </button>
                                     </li>
                                 </>

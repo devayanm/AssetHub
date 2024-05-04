@@ -109,8 +109,8 @@ const UserProfile = () => {
     };
 
     const handleLogout = async () => {
-        setLoading(true);
         try {
+            setLoading(true);
             await userApi.logoutUser();
             navigate('/');
             window.location.reload();
@@ -120,6 +120,7 @@ const UserProfile = () => {
             setLoading(false);
         }
     };
+
 
     return (
         <Container className="py-5">
@@ -167,6 +168,7 @@ const UserProfile = () => {
                                     userData={userData}
                                     onEdit={handleEditClick}
                                     onLogout={handleLogout}
+                                    loading={loading}
                                 />
                             )}
                         </Card.Body>
@@ -211,7 +213,7 @@ const UserProfile = () => {
             </Row>
             <ErrorModal message={error} onClose={() => setError(null)} />
             <SuccessModal message={success} onClose={() => setSuccess(null)} />
-            {loading && <LoadingSpinner />} {/* Loading spinner */}
+            {loading && <LoadingSpinner />}
         </Container>
     );
 };

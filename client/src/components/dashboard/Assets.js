@@ -134,7 +134,6 @@ function AssetsSection() {
         <Card className="m-5">
             <Card.Body className="p-3 m-3 ">
                 <h3>Assets</h3>
-                {loading && <Spinner animation="border" role="status"><span className="sr-only">Loading...</span></Spinner>}
                 {error && <Alert variant="danger">{error}</Alert>}
                 {assets.map((asset) => (
                     <AssetCard className="d-flex justify-content-center" key={asset.id} asset={asset} onDelete={handleDeleteAsset} />

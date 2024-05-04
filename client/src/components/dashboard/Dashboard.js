@@ -35,11 +35,14 @@ function Dashboard() {
 
   const handleLogout = async () => {
     try {
+      setLoading(true);
       await userApi.logoutUser();
       navigate('/');
       window.location.reload();
     } catch (error) {
-      setError('Error logging out: ' + error.message);
+      console.error('Error logging out:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,8 +58,8 @@ function Dashboard() {
             <Card.Body>
               <h2>Welcome {userData.username && capitalizeFirstLetter(userData.username)}</h2>
               <p className="mb-4">to your personalized Dashboard</p>
-              <Button variant="danger" onClick={handleLogout}>
-                Logout
+              <Button variant="danger" onClick={handleLogout} disabled={loading}>
+                {loading ? <Spinner animation="border" size="sm" /> : 'Logout'}
               </Button>
             </Card.Body>
           </Card>

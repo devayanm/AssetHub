@@ -94,7 +94,7 @@ const WalletButtons = () => {
     };
 
     return (
-        <div className="container text-center mt-5">
+        <div className="container text-center mt-4 mb-4">
             {isConnected && account ? (
                 <>
                     <p>Connected with account:</p>
@@ -112,7 +112,7 @@ const WalletButtons = () => {
                     style={{
                         padding: '10px 20px',
                         fontSize: '16px',
-                        borderRadius: '5px',
+                        borderRadius: '10px',
                         cursor: 'pointer'
                     }}
                     onClick={handleConnectWallet}
