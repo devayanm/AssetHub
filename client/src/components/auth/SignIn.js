@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner, InputGroup } from 'react-bootstrap';
 import { userApi } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import WalletButton from "../WalletButton";
@@ -77,21 +77,22 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBasicPassword" className="mb-3 position-relative">
-                <Form.Control
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <FontAwesomeIcon
-                  icon={showPassword ? faEyeSlash : faEye}
-                  onClick={togglePasswordVisibility}
-                  className="position-absolute end-0 top-50 translate-middle-y me-3"
-                  style={{ cursor: 'pointer' }}
-                />
+              <Form.Group controlId="formBasicPassword" className="position-relative">
+                <Form.Label>Password</Form.Label>
+                <InputGroup>
+                  <Form.Control
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <InputGroup.Text style={{ cursor: 'pointer' }} onClick={togglePasswordVisibility}>
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  </InputGroup.Text>
+                </InputGroup>
               </Form.Group>
+
 
               <div className="text-center mt-3">
                 <Link to="/auth/forgot-password">Forgot password?</Link>

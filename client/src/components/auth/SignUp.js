@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner, InputGroup } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { userApi } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import WalletButton from "../WalletButton";
@@ -30,6 +32,7 @@ const Register = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false); 
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -61,6 +64,10 @@ const Register = () => {
         setShowConfirmation(false);
         navigate('/auth/signin');
         window.location.reload();
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     return (
@@ -110,16 +117,22 @@ const Register = () => {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                    <Form.Group controlId="formBasicPassword">
+                                    <Form.Group controlId="formBasicPassword" className="position-relative">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Enter password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            required
-                                        />
+                                        <InputGroup>
+                                            <Form.Control
+                                                type={showPassword ? 'text' : 'password'}
+                                                placeholder="Enter password"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                required
+                                            />
+                                            <InputGroup.Text style={{ cursor: 'pointer' }} onClick={togglePasswordVisibility}>
+                                                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                                            </InputGroup.Text>
+                                        </InputGroup>
                                     </Form.Group>
+
                                 </Col>
                             </Row>
                             <Row className="mb-2">
