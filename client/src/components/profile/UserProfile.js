@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Container, Row, Col, Image, Modal, ListGroup, Card, Badge, Spinner } from "react-bootstrap";
 import { userApi } from '../services/api';
-import Metamask from "../Metamask";
+import WalletButton from "../WalletButton";
 
 const UserProfile = () => {
     const [userData, setUserData] = useState({});
@@ -227,7 +227,7 @@ const ViewProfile = ({ userData, onEdit, onLogout, loading }) => {
                 <p className="mb-2"><strong>Pan Number:</strong> {userData.panNumber || "Not Provided"}</p>
                 <p className="mb-2"><strong>Aadhar Number:</strong> {userData.aadharNumber || "Not Provided"}</p>
                 <p className="mb-2"><strong>Address:</strong> {userData.address || "Not Provided"}</p>
-                <Metamask />
+                <WalletButton />
                 <Button variant="primary" className="me-3" onClick={onEdit}>Edit</Button>
                 <Button
                     variant="danger"

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner } from 'react-bootstrap';
 import { userApi } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
-import Metamask from "../Metamask";
+import WalletButton from "../WalletButton";
 
 const ConfirmationModal = ({ show, onClose, message }) => {
     return (
@@ -146,7 +146,7 @@ const Register = () => {
                                         />
                                     </Form.Group>
                                 </Col>
-                                <Metamask />
+                                <WalletButton />
                             </Row>
                             <Button variant="success" type="submit" className="w-100 mb-3" disabled={loading}>
                                 {loading ? <Spinner animation="border" size="sm" /> : 'Register'}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Card, Alert, Modal, Spinner } from 'react-bootstrap';
 import { userApi } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
-import Metamask from "../Metamask";
+import WalletButton from "../WalletButton";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -98,7 +98,7 @@ const Login = () => {
               </div>
 
               <div className='mb-3'>
-                <Metamask />
+                <WalletButton />
               </div>
 
               <Button variant="success" type="submit" className="w-100 mb-3" disabled={loading}>
