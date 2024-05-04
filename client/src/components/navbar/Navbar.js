@@ -124,11 +124,11 @@ const Navbar = () => {
                                         Profile
                                     </Link>
                                 </li>
-                                <li className="nav-item">
+                                <li className="nav-item" style={{ marginLeft: '30px'}}>
                                     <button
                                         className="nav-link btn btn-link"
                                         onClick={handleLogout}
-                                        style={{ fontSize: '1.2rem', marginRight: '15px' }}
+                                        style={{ fontSize: '1.2rem' }}
                                         disabled={logoutLoading}
                                     >
                                         {logoutLoading ? 'Logging out...' : (
