@@ -62,18 +62,25 @@ The AssetHub project is built using the following technologies:
   - Cloudinary
 
 
-## Important Notice
+---
 
-**Please Note:**
-- The website might take 2 to 3 minutes to load due to some technical issues such as bugs or optimization problems. Please be patient.
-- For the best experience, use the website in desktop site mode if accessing it from a phone.
+## 🚨 Important Notice 🚨
 
-## Test User Credentials
+> **Please Note:**
+> - The website might take **2 to 3 minutes** to load due to some technical issues such as bugs or optimization problems. Please be patient.
+> - For the best experience, use the website in **desktop site mode** if accessing it from a phone.
 
-To facilitate easy access for reviewing the project, you can use the following test login credentials:
+---
 
-- **Username**: test
-- **Password**: test@1234
+## 🛠️ Test User Credentials 🛠️
+
+To facilitate easy access for interviewers and others reviewing the project, you can use the following test login credentials:
+
+| **Username** | **Password** |
+|--------------|--------------|
+|    `test`    | `test@1234`  |
+
+---
 
 
 
