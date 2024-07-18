@@ -80,7 +80,7 @@ To facilitate easy access for reviewing the project, you can use the following t
 
 
 ## Project Structure
-
+~~~
 project-root/
 │
 ├── client/
@@ -137,7 +137,7 @@ project-root/
 │   └── ...
 │
 └── README.md
-
+~~~
 
 
 ## 🌐 Website Hosting
