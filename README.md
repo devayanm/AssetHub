@@ -70,7 +70,7 @@ The AssetHub project is built using the following technologies:
 
 ## Test User Credentials
 
-To facilitate easy access for interviewers and others reviewing the project, you can use the following test login credentials:
+To facilitate easy access for reviewing the project, you can use the following test login credentials:
 
 - **Username**: test
 - **Password**: test@1234
