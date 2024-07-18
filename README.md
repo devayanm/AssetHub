@@ -1,6 +1,3 @@
-Here's an enhanced and more attractive version of your README.md:
-
-```markdown
 # AssetHub Project
 
 ![AssetHub Logo](client/src/constants/images/Logo.jpg)
@@ -83,7 +80,7 @@ To facilitate easy access for reviewing the project, you can use the following t
 
 ## Project Structure
 
-```
+
 project-root/
 │
 ├── client/
@@ -140,7 +137,6 @@ project-root/
 │   └── ...
 │
 └── README.md
-```
 
 ## 🌐 Website Hosting
 
@@ -161,8 +157,7 @@ The website is hosted on the following platforms:
 1. **Node.js:** [Install Node.js](https://nodejs.org/)
 2. **Truffle Suite:** [Install Truffle](https://www.trufflesuite.com/truffle)
 3. **Ganache:** [Install Ganache](https://www.trufflesuite.com/ganache)
-
----
+   
 
 ## 🚀 Getting Started
 
@@ -257,4 +252,3 @@ If you would like to contribute to this project, please open an issue or create 
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
-```
