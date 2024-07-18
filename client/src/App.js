@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "./components/navbar/Navbar.js";
-import Footer from "./components/footer/Footer.js";
-import RoutesConfig from "./routes.js";
-import { landRegistrationContract, vehicleRegistrationContract } from "./contractConfig.js";
+import React, { useEffect, useState, Suspense, lazy } from "react";
+// import { landRegistrationContract, vehicleRegistrationContract } from "./contractConfig.js";
+import Loader from "./components/loader/Loader.js"
 const ethers = require("ethers");
 
+const Navbar = lazy(() => import("./components/navbar/Navbar.js"));
+const Footer = lazy(() => import("./components/footer/Footer.js"));
+const RoutesConfig = lazy(() => import("./routes.js"));
 
 function App() {
   const [account, setAccount] = useState("");
@@ -21,9 +22,11 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar links={links} />
-      <RoutesConfig contract={contract} />
-      <Footer />
+      <Suspense fallback={<Loader />}>
+        <Navbar links={links} />
+        <RoutesConfig contract={contract} />
+        <Footer />
+      </Suspense>
     </div>
   );
 }
