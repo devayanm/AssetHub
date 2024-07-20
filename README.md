@@ -66,7 +66,7 @@ The AssetHub project is built using the following technologies:
 ## 🚨 Important Notice 🚨
 
 > **Please Note:**
-> - The website might take **2 to 3 minutes** to load due to some technical issues such as bugs or optimization problems. Please be patient.
+> - The website might take **2 to 3 minutes** to load due to some technical issues such as bugs or optimization problems. This delay is primarily due to the backend being hosted on a platform that employs a "cold start" mechanism. When inactive, the server spins down to save resources, causing a delay when waking up. Please be patient.
 > - For the best experience, use the website in **desktop site mode** if accessing it from a phone.
 
 ---
