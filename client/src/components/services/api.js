@@ -265,6 +265,41 @@ export const goldApi = {
     },
 };
 
+export const rentApi = {
+  getRentableAssets: async () => {
+    try {
+      const response = await api.get("/assets/rentable");
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
+
+  rentAsset: async (assetId) => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        throw new Error("Access token not found");
+      }
+
+      const response = await api.post(
+        `/assets/rent/${assetId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  },
+};
+
+
 export const cryptoApi = {
     getCryptocurrencyAssets: async () => {
         try {

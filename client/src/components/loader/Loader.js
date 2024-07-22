@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Loader = () => {
+  const [showLoader, setShowLoader] = useState(false);
+
+  useEffect(() => {
+    const isFirstVisit = !sessionStorage.getItem('visited');
+
+    if (isFirstVisit) {
+      setShowLoader(true);
+      sessionStorage.setItem('visited', 'true');
+      
+      const timer = setTimeout(() => {
+        setShowLoader(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowLoader(false);
+    }
+  }, []);
+
   const loadingMessages = [
     "Loading... Grab some coffee, this might take a while.",
     "Loading... Please hold on, the pixels are aligning perfectly.",
@@ -28,31 +47,35 @@ const Loader = () => {
     loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100 bg-dark bg-opacity-75 text-white">
-      <div className="text-center mb-4">
-        <div
-          className="spinner-border text-primary mb-3"
-          role="status"
-          style={{ width: "4rem", height: "4rem" }}
-        >
-          <span className="visually-hidden">Loading...</span>
+    <>
+      {showLoader && (
+        <div className="d-flex flex-column justify-content-center align-items-center vh-100 bg-dark bg-opacity-75 text-white">
+          <div className="text-center mb-4">
+            <div
+              className="spinner-border text-primary mb-3"
+              role="status"
+              style={{ width: "4rem", height: "4rem" }}
+            >
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <h4>{randomMessage}</h4>
+          </div>
+          <div className="progress w-75 mb-3">
+            <div
+              className="progress-bar progress-bar-striped progress-bar-animated bg-info"
+              role="progressbar"
+              style={{ width: "75%" }}
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <p className="text-muted">
+            Please wait while we prepare something amazing for you...
+          </p>
         </div>
-        <h4>{randomMessage}</h4>
-      </div>
-      <div className="progress w-75 mb-3">
-        <div
-          className="progress-bar progress-bar-striped progress-bar-animated bg-info"
-          role="progressbar"
-          style={{ width: "75%" }}
-          aria-valuenow="75"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
-      </div>
-      <p className="text-muted">
-        Please wait while we prepare something amazing for you...
-      </p>
-    </div>
+      )}
+    </>
   );
 };
 
