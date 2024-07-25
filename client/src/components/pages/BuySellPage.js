@@ -5,7 +5,6 @@ import {
   Button,
   Col,
   Form,
-  Modal,
   Dropdown,
   Pagination,
   Badge,
@@ -13,7 +12,8 @@ import {
 } from "react-bootstrap";
 import { FaArrowLeft } from "react-icons/fa";
 import { buysellApi } from "../services/api";
-import { generateSampleData } from "../services/mockdata";
+import { generateSampleBuySellData } from "../services/mockdata";
+import images from "../../constants/images";
 
 const BuySellAssetsPage = () => {
   const [products, setProducts] = useState([]);
@@ -21,13 +21,13 @@ const BuySellAssetsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(9);
   const [isSampleData, setIsSampleData] = useState(false);
-  const [mode, setMode] = useState("buying"); // buying or selling
+  const [mode, setMode] = useState("buying");
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
@@ -35,14 +35,16 @@ const BuySellAssetsPage = () => {
   });
 
   useEffect(() => {
-    fetchProducts();
+    if (mode !== "selling") {
+      fetchProducts();
+    }
   }, [mode, isSampleData]);
 
   const fetchProducts = async () => {
-    setLoading(true); // Show loading spinner
+    setLoading(true);
     try {
       const response = isSampleData
-        ? generateSampleData(180)
+        ? generateSampleBuySellData(180)
         : await buysellApi.getData();
 
       if (Array.isArray(response)) {
@@ -54,10 +56,11 @@ const BuySellAssetsPage = () => {
       }
     } catch (error) {
       console.error("Error fetching products:", error.message);
+      setProducts([]);
+      setFilteredProducts([]);
       setError(isSampleData ? null : "Failed to fetch real data.");
-      setShowErrorModal(true);
     } finally {
-      setLoading(false); // Hide loading spinner
+      setLoading(false);
     }
   };
 
@@ -117,6 +120,10 @@ const BuySellAssetsPage = () => {
   };
 
   const handleModeChange = (value) => {
+    if (value === "selling") {
+      setProducts([]);
+      setFilteredProducts([]);
+    }
     setMode(value);
     setSearchQuery("");
     setCurrentPage(1);
@@ -131,7 +138,6 @@ const BuySellAssetsPage = () => {
   };
 
   const handleAddProduct = () => {
-    // Implement product addition logic here if needed
     console.log("New Product:", newProduct);
   };
 
@@ -144,8 +150,20 @@ const BuySellAssetsPage = () => {
           </Spinner>
         </div>
       )}
-      <div className="text-center mt-3">
-        {error ? (
+      <div className="hero-section text text-center py-5 mb-5">
+        <div className="container">
+          <h1 className="display-4 mb-3">Explore Buy and Sell Assets</h1>
+          <p className="lead mb-4">
+            Discover a wide range of assets available for buying and selling.
+            Browse through various categories, sort by price, and find what
+            you're looking for with ease.
+          </p>
+        </div>
+      </div>
+      <div className="text-center mb-4">
+        {loading ? (
+          <Badge bg="info">Loading...</Badge>
+        ) : error ? (
           <Badge bg="danger">Failed to Fetch Real Data</Badge>
         ) : isSampleData ? (
           <Badge bg="success">Sample Data Displayed</Badge>
@@ -153,8 +171,6 @@ const BuySellAssetsPage = () => {
           <Badge bg="success">Real Data Displayed</Badge>
         )}
       </div>
-      <h1 className="mb-4 text-center">Buy/Sell Assets</h1>
-
       <div className="mb-5">
         <Col xs={12} md={4} lg={3} className="mb-3 mb-md-0">
           <Link to="/explore" className="btn btn-outline-success">
@@ -162,7 +178,6 @@ const BuySellAssetsPage = () => {
           </Link>
         </Col>
       </div>
-
       {isSampleData ? (
         <div className="text-center mb-3">
           <Button variant="secondary" onClick={handleSwitchToRealData}>
@@ -176,7 +191,6 @@ const BuySellAssetsPage = () => {
           </Button>
         </div>
       )}
-
       <div className="btn-group mb-3" role="group" aria-label="Buy/Sell Toggle">
         <button
           type="button"
@@ -207,7 +221,6 @@ const BuySellAssetsPage = () => {
           )}
         </button>
       </div>
-
       {mode === "selling" ? (
         isSampleData && (
           <Form className="mb-4">
@@ -268,79 +281,89 @@ const BuySellAssetsPage = () => {
                   as="button"
                   onClick={() => handleCategorySelect("")}
                 >
-                  All
+                  All Categories
                 </Dropdown.Item>
                 <Dropdown.Item
                   as="button"
-                  onClick={() => handleCategorySelect("Vehicle")}
+                  onClick={() => handleCategorySelect("Real Estate")}
                 >
-                  Vehicle
+                  Real Estate
                 </Dropdown.Item>
                 <Dropdown.Item
                   as="button"
-                  onClick={() => handleCategorySelect("Property")}
+                  onClick={() => handleCategorySelect("Vehicles")}
                 >
-                  Property
+                  Vehicles
                 </Dropdown.Item>
                 <Dropdown.Item
                   as="button"
-                  onClick={() => handleCategorySelect("Electronics")}
+                  onClick={() => handleCategorySelect("Properties")}
                 >
-                  Electronics
+                  Properties
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
 
-          <div className="mb-3">
-            <Button variant="outline-secondary" onClick={handleSort}>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <Button variant="outline-primary" onClick={handleSort}>
               Sort by Price ({sortOrder === "asc" ? "Ascending" : "Descending"})
             </Button>
           </div>
+        </>
+      )}
+      {error && (
+        <div className="alert alert-danger mt-3" role="alert">
+          {error}
+        </div>
+      )}
+      {!loading && !error && (
+        <>
+          {mode === "buying" && currentProducts.length === 0 && (
+            <div className="alert alert-info mt-3" role="alert">
+              No products found.
+            </div>
+          )}
 
-          {currentProducts.length > 0 ? (
+          {mode === "buying" && currentProducts.length > 0 && (
             <div className="row">
               {currentProducts.map((product, index) => (
                 <Col key={index} xs={12} md={6} lg={4} className="mb-4">
-                  <Card>
+                  <Card className="h-100">
+                    <Card.Img
+                      variant="top"
+                      src={product.image}
+                      alt={product.name}
+                      style={{ height: "200px", objectFit: "cover" }}
+                      onError={(e) => {
+                        e.target.src = images.placeholder;
+                      }}
+                    />
                     <Card.Body>
                       <Card.Title>{product.name}</Card.Title>
                       <Card.Text>{product.description}</Card.Text>
-                      <Card.Text>${product.price}</Card.Text>
+                      <Card.Text>Price: ${product.price}</Card.Text>
+                      <Button variant="primary">Buy Now</Button>
                     </Card.Body>
                   </Card>
                 </Col>
               ))}
             </div>
-          ) : (
-            <p>No products found.</p>
           )}
-
-          <Pagination>
-            {[...Array(totalPages).keys()].map((number) => (
-              <Pagination.Item
-                key={number + 1}
-                active={number + 1 === currentPage}
-                onClick={() => paginate(number + 1)}
-              >
-                {number + 1}
-              </Pagination.Item>
-            ))}
-          </Pagination>
         </>
       )}
 
-      <Modal show={showErrorModal} onHide={handleCloseErrorModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Error</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{error}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseErrorModal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Pagination className="mt-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === currentPage}
+            onClick={() => paginate(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+      </Pagination>
     </div>
   );
 };
