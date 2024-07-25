@@ -31,8 +31,11 @@ The frontend boasts a responsive design, ensuring a seamless user experience acr
 ## 🛠️ Future Enhancements
 
 - **🔔 User Notifications:** Implement a notification system to alert users about successful registrations, auction bids, and other relevant activities.
+  
 - **💡 Enhanced Marketplace Features:** Introduce advanced marketplace features such as a reputation system, detailed asset listings, and a decentralized review system.
+  
 - **🔗 Integration with External APIs:** Connect the DApp to external APIs for real-time asset data, enhancing the accuracy of registered information.
+  
 - **🌐 Multi-chain Support:** Explore the possibility of extending the DApp to support multiple blockchains, providing users with more choices and interoperability.
 
 ## 🧰 Tech Stack
@@ -63,7 +66,7 @@ The AssetHub project is built using the following technologies:
 ## 🚨 Important Notice 🚨
 
 > **Please Note:**
-> - The website might take **2 to 3 minutes** to load due to some technical issues such as bugs or optimization problems. Please be patient.
+> - The website might take **2 to 3 minutes** to load due to some technical issues such as bugs or optimization problems. This delay is primarily due to the backend being hosted on a platform that employs a "cold start" mechanism. When inactive, the server spins down to save resources, causing a delay when waking up. Please be patient.
 > - For the best experience, use the website in **desktop site mode** if accessing it from a phone.
 
 ---
@@ -78,6 +81,14 @@ To facilitate easy access for reviewing the project, you can use the following t
 
 ---
 
+## 🌐 Website Hosting
+
+The website is hosted on the following platforms:
+
+- [AssetHub Vercel App](https://assethubweb.vercel.app/)
+- [HubAsset Vercel App](https://hubasset.vercel.app/)
+
+---
 
 ## Project Structure
 ~~~
@@ -140,12 +151,7 @@ project-root/
 ~~~
 
 
-## 🌐 Website Hosting
 
-The website is hosted on the following platforms:
-
-- [AssetHub Vercel App](https://assethubweb.vercel.app/)
-- [HubAsset Vercel App](https://hubasset.vercel.app/)
 
 ## 📊 Insights
 
