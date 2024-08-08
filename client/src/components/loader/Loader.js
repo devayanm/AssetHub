@@ -85,11 +85,11 @@ const Loader = () => {
       setShowLoader(true);
       const timer = setTimeout(() => {
         setShowLoader(false);
-      }, 5000); 
+      }, 5000);
 
       checkBackendHealth();
 
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     } else {
       checkBackendHealth();
     }
@@ -116,6 +116,26 @@ const Loader = () => {
     "Loading... Crafting the perfect digital bouquet of pixels.",
     "Loading... Giving the algorithm a pep talk.",
     "Loading... Just catching up with the interwebs.",
+    "Loading... Inviting the data fairies over for a quick chat.",
+    "Loading... Fluffing the digital pillows for your comfort.",
+    "Loading... Organizing a pixel parade in your honor.",
+    "Loading... Spinning the yarn of digital wonder.",
+    "Loading... Brewing a fresh pot of binary coffee.",
+    "Loading... Aligning the stars of your digital galaxy.",
+    "Loading... Synchronizing the cosmic code.",
+    "Loading... Performing a digital dance-off with the servers.",
+    "Loading... Entangling electrons with elegance.",
+    "Loading... Crafting a digital symphony for your enjoyment.",
+    "Loading... Filling the data ocean with virtual sunshine.",
+    "Loading... Applying the finishing touches to your digital masterpiece.",
+    "Loading... Wrangling virtual unicorns into formation.",
+    "Loading... Setting up a digital carnival just for you.",
+    "Loading... Tuning the digital orchestra for a perfect performance.",
+    "Loading... Balancing the binary beams for optimal clarity.",
+    "Loading... Programming a little magic into your data journey.",
+    "Loading... Ensuring the digital stars are aligned perfectly.",
+    "Loading... Launching a data space shuttle to your screen.",
+    "Loading... Preparing a virtual feast of pixel delights.",
   ];
 
   const randomMessage =
