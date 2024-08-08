@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Spinner, Alert, Container, Row, Col } from "react-bootstrap";
 
 const API_BASE_URLS = [
-  process.env.REACT_APP_API_BASE_URL_PROD,
   process.env.REACT_APP_API_BASE_URL_DEV,
+  process.env.REACT_APP_API_BASE_URL_PROD,
 ];
 
 const checkBackendUrlAccessibility = async (url) => {
@@ -13,13 +14,12 @@ const checkBackendUrlAccessibility = async (url) => {
       response.status === 200 &&
       response.data.message === "This is the help message for your API."
     ) {
-      console.log(`Backend URL ${url} is accessible.`);
       return true;
     } else {
-      throw new Error(`Backend URL ${url} returned unexpected response.`);
+      throw new Error(`Unexpected response from ${url}`);
     }
   } catch (error) {
-    console.error(`Error accessing backend URL ${url}: ${error.message}`);
+    console.error(`Error with ${url}: ${error.message}`);
     return false;
   }
 };
@@ -36,9 +36,9 @@ const getBackendUrl = async () => {
 const Loader = () => {
   const [showLoader, setShowLoader] = useState(true);
   const [retryCount, setRetryCount] = useState(0);
+  const [url, setUrl] = useState("");
   const maxRetries = 5;
   const retryInterval = 3000;
-  const [url, setUrl] = useState("");
 
   const checkBackendHealth = async () => {
     try {
@@ -56,7 +56,7 @@ const Loader = () => {
         }
       }
     } catch (error) {
-      console.error("Error checking backend health:", error);
+      console.error("Backend check error:", error);
       handleRetry();
     }
   };
@@ -66,7 +66,6 @@ const Loader = () => {
       setRetryCount(retryCount + 1);
       setTimeout(checkBackendHealth, retryInterval);
     } else {
-      console.error("Max retries reached. Backend is still not ready.");
       setShowLoader(false);
     }
   };
@@ -104,41 +103,48 @@ const Loader = () => {
   return (
     <>
       {showLoader && (
-        <div className="d-flex flex-column justify-content-center align-items-center vh-100 bg-dark bg-opacity-75 text-white">
-          <div className="text-center mb-4">
-            <div
-              className="spinner-border text-primary mb-3"
-              role="status"
-              style={{ width: "4rem", height: "4rem" }}
-            >
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <h4>{randomMessage}</h4>
-          </div>
-          <div className="progress w-75 mb-3">
-            <div
-              className="progress-bar progress-bar-striped progress-bar-animated bg-info"
-              role="progressbar"
-              style={{ width: "75%" }}
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <p className="text-muted">
-            Please wait while we prepare something amazing for you...
-          </p>
-          {retryCount > 0 && retryCount < maxRetries && (
-            <p className="text-warning">
-              Attempting to reconnect... (Retry {retryCount} of {maxRetries})
-            </p>
-          )}
-          {retryCount === maxRetries && (
-            <p className="text-danger">
-              Unable to connect to the server. Please try again later.
-            </p>
-          )}
-        </div>
+        <Container className="d-flex flex-column justify-content-center align-items-center vh-100 bg-dark bg-opacity-75 text-white">
+          <Row className="text-center mb-4">
+            <Col>
+              <Spinner animation="border" variant="primary" style={{ width: "4rem", height: "4rem" }} />
+              <h4 className="mt-3">{randomMessage}</h4>
+              <Alert variant="info" className="mt-3">
+                Please wait while we ensure everything is set up correctly. This might take a few moments.
+              </Alert>
+              {retryCount > 0 && retryCount < maxRetries && (
+                <Alert variant="warning" className="mt-3">
+                  Attempting to reconnect... (Retry {retryCount} of {maxRetries})
+                </Alert>
+              )}
+              {retryCount === maxRetries && (
+                <Alert variant="danger" className="mt-3">
+                  Unable to connect to the server. Please try again later.
+                </Alert>
+              )}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className="progress w-75 mb-3">
+                <div
+                  className="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                  role="progressbar"
+                  style={{ width: `${(retryCount / maxRetries) * 100}%` }}
+                  aria-valuenow={(retryCount / maxRetries) * 100}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <p className="text-muted">
+                Ensuring the backend is available for a smooth experience. Your patience is appreciated.
+              </p>
+            </Col>
+          </Row>
+        </Container>
       )}
     </>
   );
