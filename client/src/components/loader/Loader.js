@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const API_BASE_URLS = [
-  process.env.REACT_APP_API_BASE_URL_DEV,
   process.env.REACT_APP_API_BASE_URL_PROD,
+  process.env.REACT_APP_API_BASE_URL_DEV,
 ];
 
 const checkBackendUrlAccessibility = async (url) => {
@@ -25,16 +25,22 @@ const checkBackendUrlAccessibility = async (url) => {
 };
 
 const getBackendUrl = async () => {
-  for (const url of API_BASE_URLS) {
-    if (await checkBackendUrlAccessibility(url)) {
-      return url;
+  try {
+    for (const url of API_BASE_URLS) {
+      if (await checkBackendUrlAccessibility(url)) {
+        console.log("Using backend URL:", url);
+        return url;
+      }
     }
+    throw new Error("No accessible backend URL found.");
+  } catch (error) {
+    console.error(error.message);
+    throw error;
   }
-  throw new Error("No accessible backend URL found.");
 };
 
 const Loader = () => {
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const maxRetries = 5;
   const retryInterval = 3000;
@@ -63,7 +69,7 @@ const Loader = () => {
 
   const handleRetry = () => {
     if (retryCount < maxRetries) {
-      setRetryCount((prevCount) => prevCount + 1);
+      setRetryCount(retryCount + 1);
       setTimeout(checkBackendHealth, retryInterval);
     } else {
       console.error("Max retries reached. Backend is still not ready.");
@@ -72,7 +78,21 @@ const Loader = () => {
   };
 
   useEffect(() => {
-    checkBackendHealth();
+    const initialLoad = localStorage.getItem("initialLoad");
+
+    if (!initialLoad) {
+      localStorage.setItem("initialLoad", "true");
+      setShowLoader(true);
+      const timer = setTimeout(() => {
+        setShowLoader(false);
+      }, 5000); 
+
+      checkBackendHealth();
+
+      return () => clearTimeout(timer); 
+    } else {
+      checkBackendHealth();
+    }
   }, [url]);
 
   const loadingMessages = [
