@@ -1,24 +1,79 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const API_BASE_URLS = [
+  process.env.REACT_APP_API_BASE_URL_PROD,
+  process.env.REACT_APP_API_BASE_URL_DEV,
+];
+
+const checkBackendUrlAccessibility = async (url) => {
+  try {
+    const response = await axios.get(`${url}/users/help`);
+    if (
+      response.status === 200 &&
+      response.data.message === "This is the help message for your API."
+    ) {
+      console.log(`Backend URL ${url} is accessible.`);
+      return true;
+    } else {
+      throw new Error(`Backend URL ${url} returned unexpected response.`);
+    }
+  } catch (error) {
+    console.error(`Error accessing backend URL ${url}: ${error.message}`);
+    return false;
+  }
+};
+
+const getBackendUrl = async () => {
+  for (const url of API_BASE_URLS) {
+    if (await checkBackendUrlAccessibility(url)) {
+      return url;
+    }
+  }
+  throw new Error("No accessible backend URL found.");
+};
 
 const Loader = () => {
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
+  const maxRetries = 5;
+  const retryInterval = 3000;
+  const [url, setUrl] = useState("");
 
-  useEffect(() => {
-    const isFirstVisit = !sessionStorage.getItem('visited');
+  const checkBackendHealth = async () => {
+    try {
+      if (!url) {
+        const backendUrl = await getBackendUrl();
+        setUrl(backendUrl);
+      }
 
-    if (isFirstVisit) {
-      setShowLoader(true);
-      sessionStorage.setItem('visited', 'true');
-      
-      const timer = setTimeout(() => {
-        setShowLoader(false);
-      }, 3000);
+      if (url) {
+        const response = await axios.get(`${url}/users/help`);
+        if (response.status === 200) {
+          setShowLoader(false);
+        } else {
+          handleRetry();
+        }
+      }
+    } catch (error) {
+      console.error("Error checking backend health:", error);
+      handleRetry();
+    }
+  };
 
-      return () => clearTimeout(timer);
+  const handleRetry = () => {
+    if (retryCount < maxRetries) {
+      setRetryCount(retryCount + 1);
+      setTimeout(checkBackendHealth, retryInterval);
     } else {
+      console.error("Max retries reached. Backend is still not ready.");
       setShowLoader(false);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    checkBackendHealth();
+  }, [url]);
 
   const loadingMessages = [
     "Loading... Grab some coffee, this might take a while.",
@@ -73,6 +128,16 @@ const Loader = () => {
           <p className="text-muted">
             Please wait while we prepare something amazing for you...
           </p>
+          {retryCount > 0 && retryCount < maxRetries && (
+            <p className="text-warning">
+              Attempting to reconnect... (Retry {retryCount} of {maxRetries})
+            </p>
+          )}
+          {retryCount === maxRetries && (
+            <p className="text-danger">
+              Unable to connect to the server. Please try again later.
+            </p>
+          )}
         </div>
       )}
     </>
