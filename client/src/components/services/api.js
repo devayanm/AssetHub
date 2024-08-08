@@ -366,6 +366,7 @@ export const buysellApi = {
   },
 };
 
+<<<<<<< HEAD
 
 export const healthApi = {
   checkHealth: async () => {
@@ -382,4 +383,6 @@ export const healthApi = {
   },
 };
 
+=======
+>>>>>>> bf30311df865d90bbc3727b8382edf1d6d095dc9
 export default api;

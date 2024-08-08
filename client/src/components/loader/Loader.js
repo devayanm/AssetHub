@@ -3,8 +3,8 @@ import axios from "axios";
 import { Spinner, Alert, Container, Row, Col } from "react-bootstrap";
 
 const API_BASE_URLS = [
-  process.env.REACT_APP_API_BASE_URL_DEV,
   process.env.REACT_APP_API_BASE_URL_PROD,
+  process.env.REACT_APP_API_BASE_URL_DEV,
 ];
 
 const checkBackendUrlAccessibility = async (url) => {
