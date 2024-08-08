@@ -83,7 +83,25 @@ const initializeApi = async () => {
   }
 };
 
-const api = await initializeApi();
+const initializeApiWithRetry = async (maxRetries = 5, retryInterval = 3000) => {
+  let attempt = 0;
+  while (attempt < maxRetries) {
+    try {
+      return await initializeApi();
+    } catch (error) {
+      attempt++;
+      console.error(`Initialization attempt ${attempt} failed: ${error.message}`);
+      if (attempt >= maxRetries) {
+        console.error("Max retries reached. Could not initialize API.");
+        throw error;
+      }
+      await new Promise((resolve) => setTimeout(resolve, retryInterval));
+    }
+  }
+};
+
+const api = await initializeApiWithRetry();
+
 
 export const userApi = {
   loginUser: async (userData) => {
