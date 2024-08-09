@@ -7,59 +7,69 @@ const API_BASE_URLS = [
 ];
 
 const checkBackendUrlAccessibility = async (url) => {
+  console.log(`Checking accessibility for ${url}`);
   try {
     const response = await axios.get(`${url}/users/help`);
-    if (
+    console.log(`Response from ${url}:`, response);
+    return (
       response.status === 200 &&
       response.data.message === "This is the help message for your API."
-    ) {
-      console.log(`Backend URL ${url} is accessible.`);
-      return true;
-    } else {
-      throw new Error(`Backend URL ${url} returned unexpected response.`);
-    }
+    );
   } catch (error) {
-    console.error(`Error accessing backend URL ${url}: ${error.message}`);
+    console.error(`Error accessing ${url}: ${error.message}`);
     return false;
   }
 };
 
 const getBackendUrl = async () => {
-  try {
-    for (const url of API_BASE_URLS) {
-      if (await checkBackendUrlAccessibility(url)) {
-        console.log("Using backend URL:", url);
-        return url;
-      }
+  console.log("Trying to get a working backend URL...");
+  for (const url of API_BASE_URLS) {
+    if (await checkBackendUrlAccessibility(url)) {
+      console.log(`Accessible backend URL found: ${url}`);
+      return url;
     }
-    throw new Error("No accessible backend URL found.");
+  }
+  console.error("No accessible backend URL found.");
+  throw new Error("No accessible backend URL found.");
+};
+
+const pingServer = async (url) => {
+  console.log(`Pinging server at ${url}`);
+  try {
+    await axios.get(`${url}/users/help`);
+    return true;
   } catch (error) {
-    console.error(error.message);
-    throw error;
+    console.error(`Ping error for ${url}: ${error.message}`);
+    return false;
   }
 };
 
 const Loader = () => {
   const [showLoader, setShowLoader] = useState(true);
-  const [retryCount, setRetryCount] = useState(0);
   const [url, setUrl] = useState("");
+  const [retryCount, setRetryCount] = useState(0);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const maxRetries = 10;
-  const retryInterval = 3000;
-  const checkInterval = 5000;
+  const retryInterval = 3000; // 3 seconds
+  const checkInterval = 5000; // 5 seconds
+  const pingInterval = 15000; // 15 seconds
 
+  // Check the backend accessibility for the initial loader
   const checkBackendHealth = async () => {
+    console.log("Checking backend health...");
     try {
       if (!url) {
+        console.log("Fetching a backend URL...");
         const backendUrl = await getBackendUrl();
         setUrl(backendUrl);
       }
 
       if (url) {
-        const response = await axios.get(`${url}/users/help`);
-        if (response.status === 200) {
-          setShowLoader(false);
-          localStorage.setItem("initialLoad", "true");
+        const isOnline = await checkBackendUrlAccessibility(url);
+        console.log(`Backend URL ${url} is ${isOnline ? "online" : "offline"}`);
+        if (isOnline) {
+          handleBackendOnline();
         } else {
           handleBackendFailure();
         }
@@ -70,33 +80,104 @@ const Loader = () => {
     }
   };
 
+  const handleBackendOnline = () => {
+    setShowLoader(false);
+    if (isInitialLoad) {
+      sessionStorage.setItem("initialLoadComplete", "true");
+      setIsInitialLoad(false);
+      console.log("Initial load completed. Session storage updated.");
+    }
+  };
+
   const handleBackendFailure = () => {
     if (retryCount < maxRetries) {
       setRetryCount((prevRetryCount) => prevRetryCount + 1);
+      console.log(
+        `Retrying in ${retryInterval / 1000} seconds... (Retry ${
+          retryCount + 1
+        })`
+      );
       setTimeout(checkBackendHealth, retryInterval);
     } else {
       console.error("Max retries reached. Backend is still not ready.");
-      setShowLoader(true);
-      localStorage.removeItem("initialLoad");
-      setTimeout(() => {
-        window.location.reload();
-      }, 5000);
+      triggerPageReload();
+    }
+  };
+
+  const triggerPageReload = () => {
+    setShowLoader(true);
+    setTimeout(() => {
+      console.log("Refreshing page...");
+      window.location.reload();
+    }, 5000);
+  };
+
+  // Continuous monitoring of the backend status
+  const monitorServer = async () => {
+    console.log("Monitoring server...");
+    try {
+      if (url) {
+        const isOnline = await pingServer(url);
+        if (!isOnline) {
+          console.log("Server is down. Refreshing page...");
+          sessionStorage.removeItem("initialLoadComplete");
+          setIsInitialLoad(true);
+          setRetryCount(0);
+          triggerPageReload();
+        }
+      }
+    } catch (error) {
+      console.error("Error monitoring server:", error);
     }
   };
 
   useEffect(() => {
-    const initialLoad = localStorage.getItem("initialLoad");
+    console.log("Component mounted or URL changed.");
+    const initialLoadComplete = sessionStorage.getItem("initialLoadComplete");
 
-    if (!initialLoad) {
+    if (!initialLoadComplete) {
+      console.log("Initial load flag not set. Checking backend health...");
       checkBackendHealth();
     } else {
-      const monitorBackend = setInterval(checkBackendHealth, checkInterval);
-
-      return () => clearInterval(monitorBackend);
+      console.log("Initial load flag set. Hiding loader.");
+      setShowLoader(false);
     }
+
+    const monitorBackend = setInterval(checkBackendHealth, checkInterval);
+    const monitorServerInterval = setInterval(monitorServer, pingInterval);
+
+    const handleBeforeUnload = () => {
+      console.log("Removing initial load flag before unload...");
+      sessionStorage.removeItem("initialLoadComplete");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      clearInterval(monitorBackend);
+      clearInterval(monitorServerInterval);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      console.log("Cleanup on component unmount.");
+    };
   }, [url]);
 
-  useEffect(() => {}, [retryCount]);
+  useEffect(() => {
+    if (!showLoader && !isInitialLoad) {
+      console.log("Setting up server check interval...");
+      const serverCheck = setInterval(() => {
+        if (retryCount >= maxRetries) {
+          console.log("Retry count exceeded. Showing loader...");
+          setShowLoader(true);
+          setRetryCount(0);
+        }
+      }, retryInterval);
+
+      return () => {
+        clearInterval(serverCheck);
+        console.log("Server check interval cleared.");
+      };
+    }
+  }, [showLoader, retryCount, isInitialLoad]);
 
   const loadingMessages = [
     "Loading... Grab some coffee, this might take a while.",
