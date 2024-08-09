@@ -40,11 +40,13 @@ const getBackendUrl = async () => {
 };
 
 const Loader = () => {
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const [retryCount, setRetryCount] = useState(0);
-  const maxRetries = 5;
-  const retryInterval = 3000;
   const [url, setUrl] = useState("");
+
+  const maxRetries = 10;
+  const retryInterval = 3000;
+  const checkInterval = 5000;
 
   const checkBackendHealth = async () => {
     try {
@@ -57,23 +59,28 @@ const Loader = () => {
         const response = await axios.get(`${url}/users/help`);
         if (response.status === 200) {
           setShowLoader(false);
+          localStorage.setItem("initialLoad", "true");
         } else {
-          handleRetry();
+          handleBackendFailure();
         }
       }
     } catch (error) {
       console.error("Error checking backend health:", error);
-      handleRetry();
+      handleBackendFailure();
     }
   };
 
-  const handleRetry = () => {
+  const handleBackendFailure = () => {
     if (retryCount < maxRetries) {
-      setRetryCount(retryCount + 1);
+      setRetryCount((prevRetryCount) => prevRetryCount + 1);
       setTimeout(checkBackendHealth, retryInterval);
     } else {
       console.error("Max retries reached. Backend is still not ready.");
-      setShowLoader(false);
+      setShowLoader(true);
+      localStorage.removeItem("initialLoad");
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000);
     }
   };
 
@@ -81,19 +88,15 @@ const Loader = () => {
     const initialLoad = localStorage.getItem("initialLoad");
 
     if (!initialLoad) {
-      localStorage.setItem("initialLoad", "true");
-      setShowLoader(true);
-      const timer = setTimeout(() => {
-        setShowLoader(false);
-      }, 5000);
-
       checkBackendHealth();
-
-      return () => clearTimeout(timer);
     } else {
-      checkBackendHealth();
+      const monitorBackend = setInterval(checkBackendHealth, checkInterval);
+
+      return () => clearInterval(monitorBackend);
     }
   }, [url]);
+
+  useEffect(() => {}, [retryCount]);
 
   const loadingMessages = [
     "Loading... Grab some coffee, this might take a while.",

@@ -83,7 +83,7 @@ const initializeApi = async () => {
   }
 };
 
-const initializeApiWithRetry = async (maxRetries = 5, retryInterval = 3000) => {
+const initializeApiWithRetry = async (maxRetries = 10, retryInterval = 3000) => {
   let attempt = 0;
   while (attempt < maxRetries) {
     try {
