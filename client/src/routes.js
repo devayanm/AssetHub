@@ -18,6 +18,7 @@ import BuySellAssets from "./components/pages/BuySellPage.js";
 import GoldPage from "./components/pages/GoldPage.js";
 import CryptoPage from "./components/pages/CryptocurrencyPage.js";
 import ProtectedRoute from './components/ProtectedRoute';
+import RentPage from "./components/pages/RentPage.js";
 
 const RoutesConfig = ({ contract }) => {
     return (
@@ -27,6 +28,7 @@ const RoutesConfig = ({ contract }) => {
             <Route path="/auth/signup" element={<SignUp />} />
             <Route path="/explore" element={<ProtectedRoute> <Explore /> </ProtectedRoute>} />
             <Route path="/buy-sell" element={<BuySellAssets />} />
+            <Route path="/rent" element={<RentPage />} />
             <Route path="/gold" element={<GoldPage />} />
             <Route path="/crypto" element={<CryptoPage />} />
             <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
