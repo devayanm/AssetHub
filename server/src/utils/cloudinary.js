@@ -1,5 +1,6 @@
 import {v2 as cloudinary} from "cloudinary"
 import fs from "fs"
+import { ApiError } from "./ApiError";
 
 
 cloudinary.config({ 
@@ -8,11 +9,29 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
-const uploadOnCloudinary = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePaths) => {
     try {
-        if (!localFilePath) return null
+        if (Array.isArray(localFilePaths)){
+            const uploadedUrls = [];
+
+        // Iterate over each local file path
+        for (const localFilePath of localFilePaths) {
+           try {
+             const response = await cloudinary.uploader.upload(localFilePath, {
+                resource_type: "auto"
+            });
+            uploadedUrls.push(response.url);
+
+           } catch (error) {
+            throw new ApiError(error.code, "all files are not uploaded")
+           }
+        }
+        return uploadedUrls
+        };
+
+        if (!localFilePaths) return null
         //upload the file on cloudinary
-        const response = await cloudinary.uploader.upload(localFilePath, {
+        const response = await cloudinary.uploader.upload(localFilePaths, {
             resource_type: "auto"
         })
         // file has been uploaded successfull
@@ -20,9 +39,10 @@ const uploadOnCloudinary = async (localFilePath) => {
         return response;
 
     } catch (error) {
-        fs.unlinkSync(localFilePath) // remove the locally saved temporary file as the upload operation got failed
+        fs.unlinkSync(localFilePaths) // remove the locally saved temporary file as the upload operation got failed
         return null;
     }
+    
 }
 
 
