@@ -129,4 +129,4 @@ const deleteAdv = asyncHandler(async (req, res) => {
 });
 
 
-export { getAllAdvs, getAdvById, newAdv, updateAdv, deleteAdv };
+export { getAllAdvs, getAdvById, newAdv, deleteAdv };
